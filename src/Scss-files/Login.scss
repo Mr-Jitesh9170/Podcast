@@ -1,0 +1,69 @@
+.logIn-container {
+  background-color: white;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  gap: 20px;
+  padding: 28px;
+  border-radius: 13px;
+  .log-top1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    :nth-child(1){
+      font-weight: 600;
+      font-size: 20px;
+    }
+  }
+  .log-top2 {
+    padding: 10px 15px;
+    border: 1px solid black;
+    border-radius: 8px;
+    text-align: center;
+
+    span {
+      margin-right: 15px;
+    }
+  }
+  .log-top3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    span {
+      width: 30%;
+      height: 2px;
+      background-color: black;
+    }
+  }
+  .log-top4 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    input {
+      padding: 10px 15px;
+      border-radius: 8px;
+      outline: none;
+      border: 1px solid black;
+    }
+    a {
+      align-self: flex-end;
+    }
+  }
+  button {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    border: 1px solid black;
+  }
+  .log-top5 {
+    padding: 3px 2px;
+    align-self: center;
+    font-size: 14px;
+    span {
+      margin-right: 10px;
+    }
+  }
+}

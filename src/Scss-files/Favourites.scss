@@ -1,0 +1,22 @@
+.favourites-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 25px 30px;
+  h2 {
+    margin-bottom: 20px;
+    color: #fff;
+  }
+  .your-favourites-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    .favourites-data {
+      width: 200px;
+      height: 230px;
+      background-color: white;
+      text-align: center;
+      border-radius: 10px;
+    }
+  }
+}

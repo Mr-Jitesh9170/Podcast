@@ -1,0 +1,62 @@
+.upload-container {
+  width: 30%;
+  height: 100%;
+  overflow-y: auto;
+  background-color: rgb(6, 199, 6);
+  padding: 15px 25px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  margin: auto;
+  gap: 20px;
+  .upload-1 {
+    display: flex;
+    justify-content: space-between;
+  }
+  .file-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 16px;
+    gap: 8px;
+    border-radius: 10px;
+    border: 1px dotted rgb(242, 241, 241);
+    p {
+      span {
+        margin-right: 10px;
+      }
+      label {
+        color: blue;
+      }
+    }
+  }
+  input,
+  textarea {
+    border: 1px solid rgb(242, 241, 241);
+    padding: 12px 16px;
+    border-radius: 10px;
+    background-color: green;
+    outline: none;
+    color: rgb(42, 26, 26);
+  }
+  .upload-selection-box {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    .selection-box {
+      width: 50%;
+      border: 1px solid rgb(242, 241, 241);
+      padding: 12px 16px;
+      border-radius: 10px;
+      background-color: green;
+      outline: none;
+    }
+  }
+  button {
+    padding: 12px 16px;
+    border-radius: 10px;
+    color: black;
+    background-color: grey;
+    border: none;
+  }
+}
