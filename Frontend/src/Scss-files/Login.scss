@@ -1,0 +1,73 @@
+.logIn-container {
+  background-color: white;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  gap: 15px;
+  padding: 28px;
+  border-radius: 13px;
+  .log-top1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    :nth-child(1) {
+      font-weight: 600;
+      font-size: 20px;
+    }
+    :nth-child(1) {
+      cursor: pointer;
+    }
+  }
+  .log-top2 {
+    padding: 7px 15px;
+    border: 1px solid rgba(0, 0, 0, 0.546);
+    border-radius: 8px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+  .log-top3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    span {
+      width: 30%;
+      height: 2px;
+      background-color: black;
+    }
+  }
+  .log-top4 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    input {
+      padding: 10px 15px;
+      border-radius: 8px;
+      outline: none;
+      border: 1px solid rgba(0, 0, 0, 0.546);
+    }
+    a {
+      align-self: flex-end;
+    }
+  }
+  button {
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.546);
+  }
+  .log-top5 {
+    padding: 3px 2px;
+    align-self: center;
+    font-size: 14px;
+    span {
+      margin-right: 4px;
+    }
+  }
+}

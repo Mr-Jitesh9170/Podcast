@@ -1,0 +1,124 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.podcaste-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  .para {
+    padding: 20px 0;
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    background-color: rgba(153, 205, 50, 0.311);
+  }
+
+  .left-container {
+    background-color: #171717;
+    width: 18%;
+    height: 100%;
+    .left-container-top {
+      height: 10%;
+      padding: 10px 12px;
+      background-color: #171717;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      img {
+        width: 25px;
+      }
+      span {
+        font-weight: bold;
+        font-size: 22px;
+        color: #cc83ff;
+      }
+    }
+    .bottom-data {
+      text-decoration: none;
+      padding: 10px 14.5px;
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      margin: 2% 0;
+      .img {
+        fill: #fff;
+        width: 20px;
+      }
+      .left-name {
+        font-size: 15px;
+        font-weight: 500;
+        color: #fff;
+      }
+      &:not(:first-child):hover {
+        background-color: #252525;
+        margin-right: 20px;
+        border-left: 3px solid #fdfdfd;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .right-container {
+    width: 88%;
+    height: 100%;
+    .right-container-top {
+      height: 10%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 55px;
+      background-color: #171717;
+      box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.703);
+      .threedashIcon {
+        width: 24px;
+        fill: #fff;
+        cursor: pointer;
+      }
+      .accountIcon {
+        cursor: pointer;
+        display: flex;
+        gap: 5px;
+        padding: 4px 8px;
+        align-items: center;
+        border: 1px solid #cc83ff;
+        border-radius: 14px;
+        .acc {
+          width: 24px;
+          fill: #cc83ff;
+        }
+        span {
+          color: #cc83ff;
+          font-weight: 600;
+        }
+      }
+    }
+    .right-container-bottom {
+      background-color: #1e1e1e;
+      width: 100%;
+      height: 90%;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  display: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #cc83ff;
+  border-radius: 10px;
+ }
