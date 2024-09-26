@@ -1,4 +1,4 @@
-import "../Scss-files/Component/card.scss"
+import "./card.scss"
 export const Card = () => {
   return (
     <div className="card-container">
@@ -16,4 +16,4 @@ export const Card = () => {
       </div>
     </div>
   )
-}
+} 

@@ -1,13 +1,11 @@
-import "../Scss-files/Upload.scss"
-import { useState } from "react"
-import { DashboardIcons, UploadSelectionData } from "../AllData/data"
+import "../styles/Upload.scss"
+import { DashboardIcons, UploadSelectionData } from "../data/data"
 
 export const Upload = ({ setIsOpen }) => {
   return (
     <div className="upload-container">
       <div className="upload-1">
         <h3>Upload Podcast</h3>
-        {/* <----------------------[ cross button ]-----------> */}
         <span onClick={() => setIsOpen((prevState) => ({ ...prevState, isTrue: false }))}>{DashboardIcons.crossIcon}</span>
       </div>
       <p>Podcast details:</p>

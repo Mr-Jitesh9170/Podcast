@@ -1,6 +1,6 @@
-import "../Scss-files/Favourites.scss"
-import { AllFavourites } from "../AllData/data"
-import { Card } from "../Component/card"
+import "../styles/Favourites.scss"
+import { AllFavourites } from "../data/data"
+import { Card } from "../components/card"
 export const Favourites = ({ Name }) => {
   return (
     <div className="favourites-container">

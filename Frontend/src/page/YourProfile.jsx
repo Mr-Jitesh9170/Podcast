@@ -1,4 +1,4 @@
-import "../Scss-files/YourProfile.scss"
+import "../auth/YourProfile.scss"
 import { Favourites } from "./Favourites"
 export const YourProfile = () => {
   return (

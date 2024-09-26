@@ -6,27 +6,32 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+
   p {
     display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    // -webkit-line-clamp: 2;
+    // -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
   }
+
   .img {
     border-radius: 5px;
     background-color: aqua;
     height: 100px;
     width: 100%;
   }
+
   .card-thumbnail-icon {
     display: flex;
     justify-content: space-between;
+
     .icon-thumbnail {
       display: flex;
       align-items: center;
       gap: 5px;
+
       .img {
         width: 20px;
         height: 20px;

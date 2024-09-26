@@ -1,5 +1,7 @@
-import "../Scss-files/DashBoard.scss"
-import { DashBoardData, DashBoardChild } from "../AllData/data"
+import "../styles/DashBoard.scss"
+import { DashBoardData } from "../data/data"
+import { DashBoardChild } from "../components/dashboardChild";
+
 export const DashBoard = () => {
   return (
     <div className="Dashboard-container">
@@ -8,6 +10,6 @@ export const DashBoard = () => {
           return <DashBoardChild Name={_.name} Data={_.data} />
         })
       }
-    </div> 
+    </div>
   )
 }
