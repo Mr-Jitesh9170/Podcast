@@ -5,14 +5,13 @@ import { useState, useContext } from "react";
 import { IsLogginedContext } from "../context/isLogined";
 
 export const LogIn = () => {
-  const [isLogin, setLogin] = useState(false)
+  const [isLogin, setLogin] = useState(true)
   const { isClosed, setClosed } = useContext(IsLogginedContext);
 
   // switch sing in/sign up =>
   const isLoggined = () => {
     isLogin ? setLogin(false) : setLogin(true)
   }
-  
   // close page =>
   const handleClosed = () => {
     isClosed ? setClosed(false) : setClosed(true)

@@ -1,12 +1,20 @@
 import "../styles/Upload.scss"
 import { DashboardIcons, UploadSelectionData } from "../data/data"
+import { useContext } from "react";
+import { IsLogginedContext } from "../context/isLogined";
 
-export const Upload = ({ setIsOpen }) => {
+export const Upload = () => {
+  const { isClosed, setClosed } = useContext(IsLogginedContext);
+
+  const handleClosed = () => {
+    isClosed ? setClosed(false) : setClosed(true)
+  }
+  
   return (
     <div className="upload-container">
       <div className="upload-1">
         <h3>Upload Podcast</h3>
-        <span onClick={() => setIsOpen((prevState) => ({ ...prevState, isTrue: false }))}>{DashboardIcons.crossIcon}</span>
+        <span onClick={handleClosed}>{DashboardIcons.crossIcon}</span>
       </div>
       <p>Podcast details:</p>
       <div className="file-upload">

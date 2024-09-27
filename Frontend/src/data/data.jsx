@@ -53,35 +53,37 @@ export let leftDashBoardBottom = [
   {
     name: "Upload",
     img: UploadIcon,
-    route: <Upload />
+    Copm: <Upload />
   },
   {
     name: "Log In",
     img: LoginIcon,
-    route: <LogIn />
+    Copm: <LogIn />
   },
 ]
+
+let data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 
 export const DashBoardData = [
   {
     name: "Most Popular",
-    data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    data
   },
   {
     name: "Comedy",
-    data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    data
   },
   {
     name: "News",
-    data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    data
   },
   {
     name: "Crime",
-    data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    data
   },
   {
     name: "Sports",
-    data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    data
   }
 ]
 

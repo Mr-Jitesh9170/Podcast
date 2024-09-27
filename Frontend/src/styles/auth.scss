@@ -1,93 +1,111 @@
-.logIn-container {
-  background-color: white;
-  width: 30%;
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  gap: 15px;
-  padding: 28px;
-  border-radius: 13px;
-  box-shadow: 0px 0px 2px rgb(9, 7, 7);
+ $headingColor: #f2f3f4;
+ $borderColor: #b0b1b2;
+ $backgroundColor: #121212;
 
-  .log-top1 {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+ .logIn-container {
+   background-color: $backgroundColor;
+   width: 30%;
+   display: flex;
+   flex-direction: column;
+   margin: auto;
+   gap: 15px;
+   padding: 28px;
+   border-radius: 13px;
+   box-shadow: 0px 0px 2px rgb(9, 7, 7);
 
-    :nth-child(1) {
-      font-weight: 600;
-      font-size: 20px;
-    }
+   .log-top1 {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
 
-    :nth-child(1) {
-      cursor: pointer;
-    }
-  }
+     :nth-child(1) {
+       font-weight: 600;
+       font-size: 20px;
+       color: $headingColor;
+     }
 
-  .log-top2 {
-    padding: 7px 15px;
-    border: 1px solid rgba(0, 0, 0, 0.546);
-    border-radius: 8px;
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-  }
+     :nth-child(1) {
+       cursor: pointer;
+     }
+   }
 
-  .log-top3 {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    justify-content: center;
+   .log-top2 {
+     padding: 7px 15px;
+     border: 1px solid $borderColor;
+     border-radius: 8px;
+     display: flex;
+     gap: 10px;
+     justify-content: center;
+     align-items: center;
+     text-decoration: none;
 
-    span {
-      width: 30%;
-      height: 2px;
-      background-color: black;
-    }
-  }
+     span {
+       color: $borderColor;
+     }
+   }
 
-  .log-top4 {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+   .log-top3 {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+     justify-content: center;
 
-    input {
-      padding: 10px 15px;
-      border-radius: 8px;
-      outline: none;
-      border: 1px solid rgba(0, 0, 0, 0.546);
-    }
+     div {
+       color: $borderColor;
+     }
 
-    a {
-      align-self: flex-end;
-      color: blue;
-    }
-  }
+     span {
+       width: 30%;
+       height: 2px;
+       background-color: $borderColor;
+     }
+   }
 
-  button {
-    cursor: pointer;
-    padding: 10px 15px;
-    border-radius: 8px;
-    border: none;
-    border: 1px solid rgba(0, 0, 0, 0.546);
-  }
+   .log-top4 {
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+     gap: 10px;
 
-  .log-top5 {
-    padding: 3px 2px;
-    align-self: center;
-    font-size: 14px;
+     input {
+       padding: 10px 15px;
+       border-radius: 8px;
+       outline: none;
+       border: 1px solid $borderColor;
+       background-color: $backgroundColor;
+     }
 
-    span {
-      margin-right: 4px;
-    }
+     a {
+       align-self: flex-end;
+       color: blue;
+     }
+   }
 
-    :nth-child(2) {
-      color: blue;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-  }
-}
+   button {
+     cursor: pointer;
+     padding: 10px 15px;
+     border-radius: 8px;
+     border: none;
+     border: 1px solid rgba(0, 0, 0, 0.546);
+     background-color: #5c5b5b;
+     color: $borderColor;
+     font-weight: 600;
+   }
+
+   .log-top5 {
+     padding: 3px 2px;
+     align-self: center;
+     font-size: 14px;
+
+     span {
+       margin-right: 4px;
+       color: $borderColor;
+     }
+
+     :nth-child(2) {
+       color: blue;
+       text-decoration: underline;
+       cursor: pointer;
+     }
+   }
+ }

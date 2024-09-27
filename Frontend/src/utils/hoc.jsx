@@ -1,7 +1,7 @@
-export const Hoc = ({ WrappedComp }) => {
+export const higherOrderComponent = (  Copm ) => {
     return (
         <>
-            <WrappedComp />
+            <Copm />
         </>
     )
 }
