@@ -1,22 +1,24 @@
-import mongoose from "mongoose"
+const mongoose = require("mongoose")
 
 // Scheama =>
-const Scheama =new mongoose.Schema(
+const Scheama = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true
+      required: "Name is missing!"
     },
     email: {
       type: String,
-      required: true
+      required: "Email is missing!",
+      unique: true
     },
     password: {
       type: String,
-      required: true
-    }
+      required: "Password is missing!"
+    },
+    token: [String]
   }
 )
 
 // models =>
-export const Register = mongoose.model("Register", Scheama);
+module.exports = mongoose.model("users", Scheama);

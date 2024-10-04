@@ -9,4 +9,4 @@ export const IsLoginnedProvider = ({ children }) => {
             {children}
         </IsLogginedContext.Provider>
     )
-}
+} 

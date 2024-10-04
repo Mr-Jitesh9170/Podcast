@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { leftDashBoardTop, DashboardIcons, leftDashBoardBottom } from "../data/data";
 import { Outlet, Link } from "react-router-dom";
 import "../styles/home.scss";
@@ -10,7 +10,8 @@ import { Upload } from "./Upload";
 export const Home = () => {
   const [click, setClick] = useState(true);
   const { isClosed, setClosed } = useContext(IsLogginedContext);
-  const [render, setRender] = useState(null)
+  const [render, setRender] = useState(null);
+
   const handleClosed = () => {
     isClosed ? setClosed(false) : setClosed(true)
   }
@@ -21,7 +22,7 @@ export const Home = () => {
     <div className="podcaste-container">
       {
         isClosed && (<div className="para">
-          {render == 0 ? <Upload /> : <LogIn />}
+          {render === 0 ? <Upload /> : <LogIn />}
         </div>)
       }
       {
@@ -46,13 +47,22 @@ export const Home = () => {
           {
             leftDashBoardBottom.map(({ img, name }, i) => {
               return (
-                <Link className="bottom-data underline" key={i} onClick={() => {
-                  setRender(i)
-                  handleClosed();
-                }}>
-                  <div className="img">{img}</div>
-                  <div className="left-name" >{name}</div>
-                </Link >
+                <>
+                  {
+                    i == 1 ? (
+                      localStorage.getItem('token') ?
+                        <Link className="bottom-data" key={i}>
+                          <div className="img" >{img}</div>
+                          <div className="left-name" >{name}</div>
+                        </Link> : "logout"
+                    ) : (
+                      <Link className="bottom-data" key={i}>
+                        <div className="img" >{img}</div>
+                        <div className="left-name" >{name}</div>
+                      </Link>
+                    )
+                  }
+                </>
               )
             })
           }
@@ -64,11 +74,16 @@ export const Home = () => {
           <h3>Podcaste</h3>
           <div className="accountIcon">
             <div className="acc">{DashboardIcons.accountIcon}</div>
-            <span onClick={handleClosed} >Login</span>
+            <span onClick={() => {
+              setRender(1)
+              handleClosed()
+            }} >Login</span>
           </div>
         </div>
         <div className="right-container-bottom" >
-          <Outlet />
+          {
+            localStorage.getItem("token") ? <Outlet /> : <LogIn />
+          }
         </div>
       </div>
     </div >
