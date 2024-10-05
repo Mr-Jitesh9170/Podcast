@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(require("./routes/authRoutes.js"))
 app.use(verifyToken);
 
-// db connected =>
+// db connected => 
 mongoConnect();
 
 // routes =>
