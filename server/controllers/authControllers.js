@@ -13,7 +13,7 @@ exports.signUpControllers = async (req, res) => {
         }
         let user = await userModel.findOne({ email });
         if (user) {
-            return res.json({ status: 200, message: "User already exists!" })
+            return res.json({ status: 200, message: "User already exists!" });
         }
         const saltRounds = 10;
         password = await bcrypt.hash(password, saltRounds);

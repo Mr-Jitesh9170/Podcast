@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { leftDashBoardTop, DashboardIcons, leftDashBoardBottom } from "../data/data";
 import { Outlet, Link } from "react-router-dom";
 import "../styles/home.scss";
-import Logo from "../assets/Logo.png"
+import Logo from "../Assets/Logo.png"
 import { LogIn } from "../page/auth";
 import { IsLogginedContext } from "../context/isLogined";
 import { Upload } from "./Upload";
@@ -12,8 +12,9 @@ export const Home = () => {
   const { isClosed, setClosed } = useContext(IsLogginedContext);
   const [render, setRender] = useState(null);
 
-  const handleClosed = () => {
+  const handleClosed = (i) => {
     isClosed ? setClosed(false) : setClosed(true)
+    setRender(i)
   }
   const handleResize = () => {
     click ? setClick(false) : setClick(true)
@@ -49,18 +50,10 @@ export const Home = () => {
               return (
                 <>
                   {
-                    i == 1 ? (
-                      localStorage.getItem('token') ?
-                        <Link className="bottom-data" key={i}>
-                          <div className="img" >{img}</div>
-                          <div className="left-name" >{name}</div>
-                        </Link> : "logout"
-                    ) : (
-                      <Link className="bottom-data" key={i}>
-                        <div className="img" >{img}</div>
-                        <div className="left-name" >{name}</div>
-                      </Link>
-                    )
+                    <Link className="bottom-data" key={i} onClick={() => handleClosed(i)}>
+                      <div className="img" >{img}</div>
+                      <div className="left-name" >{name}</div>
+                    </Link>
                   }
                 </>
               )
@@ -81,9 +74,7 @@ export const Home = () => {
           </div>
         </div>
         <div className="right-container-bottom" >
-          {
-            localStorage.getItem("token") ? <Outlet /> : <LogIn />
-          }
+          <Outlet />
         </div>
       </div>
     </div >

@@ -1,5 +1,5 @@
 import "../styles/auth.scss";
-import GoogleIcon from "../assets/google.webp";
+import GoogleIcon from "../Assets/google.webp";
 import { DashboardIcons } from "../data/data";
 import { useState, useContext } from "react";
 import { IsLogginedContext } from "../context/isLogined";
@@ -14,7 +14,7 @@ export const LogIn = () => {
   const [isLogin, setLogin] = useState(true)
   const { isClosed, setClosed } = useContext(IsLogginedContext);
   const [input, setInput] = useState(
-    {
+    { 
       name: "",
       email: "",
       password: ""

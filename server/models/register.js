@@ -7,7 +7,7 @@ const Scheama = new mongoose.Schema(
       type: String,
       required: "Name is missing!"
     },
-    email: {
+    email: { 
       type: String,
       required: "Email is missing!",
       unique: true
