@@ -22,7 +22,7 @@ exports.signUpControllers = async (req, res) => {
     } catch (error) {
         console.log(error, "<--- error in signup controllers!")
         res.json({ status: 500, message: "Internal server error!" })
-    }
+    } 
 }
 
 exports.signInControllers = async (req, res) => {

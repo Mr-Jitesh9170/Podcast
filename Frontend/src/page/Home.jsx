@@ -65,12 +65,12 @@ export const Home = () => {
         <div className="right-container-top">
           <div className="threedashIcon" onClick={handleResize} >{DashboardIcons.threeDashIcon}</div>
           <h3>Podcaste</h3>
-          <div className="accountIcon">
+          <div className="accountIcon" onClick={() => {
+            setRender(1)
+            handleClosed()
+          }}>
             <div className="acc">{DashboardIcons.accountIcon}</div>
-            <span onClick={() => {
-              setRender(1)
-              handleClosed()
-            }} >Login</span>
+            <span >Login</span>
           </div>
         </div>
         <div className="right-container-bottom" >

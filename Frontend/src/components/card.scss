@@ -1,5 +1,5 @@
-.card-container {
-  background-color: #c183ff;
+.cardContainer {
+  background-color: rgba(0, 255, 255, 0.329);
   padding: 13px 14px;
   width: 220px;
   border-radius: 5px;
@@ -7,20 +7,25 @@
   flex-direction: column;
   gap: 5px;
 
+  .img {
+    border-radius: 5px;
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
   p {
     display: -webkit-box;
-    // -webkit-line-clamp: 2;
-    // -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
-  }
-
-  .img {
-    border-radius: 5px;
-    background-color: aqua;
-    height: 100px;
-    width: 100%;
   }
 
   .card-thumbnail-icon {
@@ -38,6 +43,18 @@
         background-color: black;
         border-radius: 100%;
       }
+    }
+  }
+  .bottomContainer {
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    span {
+      font-weight: bold;
     }
   }
 }

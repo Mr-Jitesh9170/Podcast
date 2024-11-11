@@ -1,10 +1,9 @@
-
 const { Router } = require("express");
-const { uploadPodcasteContrl } = require("../controllers/podcasteControllers");
+const { createPodcasteControllers } = require("../controllers/podcasteControllers");
 const { podcastUploads } = require("../middleware/multer");
 
 const router = Router();
 
-router.post("/podcast/user", podcastUploads.single('video'), uploadPodcasteContrl);
+router.post("/podcast/create", podcastUploads.array('imgAndVideo', 2), createPodcasteControllers);
 
 module.exports = router; 

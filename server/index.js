@@ -6,32 +6,23 @@ const { verifyToken } = require("./middleware/jwtAuth.js")
 const app = express();
 
 
-class Podcast {
- 
-
-  hello = () => {
-    console.log("hello world")
-  }
-
-}
-
-const hello = new Podcast();
-
-console.log(hello.hello())
-
-
 // middleware =>
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(require("./routes/authRoutes.js"));
-app.use(verifyToken);
 
 // db connected => 
 mongoConnect();
 
 // routes => 
 app.use(require("./routes/podcasteRoutes.js"));
+app.use(verifyToken);
+ 
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ success: false, message: err.message || 'Internal Server Error' });
+});
 
 app.listen(process.env.PORT, () => {
   console.log(`server is running on -> ${process.env.PORT}`)
