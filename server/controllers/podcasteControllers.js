@@ -1,7 +1,7 @@
 const podcastUpload = require("../models/uploadPodcaste");
 
 exports.createPodcasteControllers = async (req, res, next) => {
-    let reqBody = ["userId", "podcastName", "podcastDescriptions", "podcastFormet", "podcastCategory", "episodeName", "episodeDescription"]
+    let reqBody = ["userId", "podcastName", "podcastDescriptions", "isMedia", "podcastCategory", "episodeName", "episodeDescription"]
     let missinField = reqBody.filter((_) => {
         if (!req.body[_])
             return _;
@@ -9,7 +9,6 @@ exports.createPodcasteControllers = async (req, res, next) => {
     if (missinField.length > 0) {
         return res.json({ status: 401, message: "Missing field!" })
     }
-
     try {
         if (!req.files.length) {
             return res.json({ status: 200, message: "Podcast files missing!" })
@@ -22,3 +21,4 @@ exports.createPodcasteControllers = async (req, res, next) => {
         next(error)
     }
 }
+

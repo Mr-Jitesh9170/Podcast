@@ -6,7 +6,7 @@ const uploadPodcastSchema = new Schema(
             type: Schema.Types.ObjectId,
             required: true,
         },
-        podcastImage: {
+        episodeImgPath: {
             type: String,
             required: true
         },
@@ -18,7 +18,7 @@ const uploadPodcastSchema = new Schema(
             type: String,
             required: true
         },
-        podcastFormet: {
+        isMedia: {
             type: String,
             required: true,
             enum: ["Audio", "Video"]
@@ -32,10 +32,7 @@ const uploadPodcastSchema = new Schema(
             type: String,
             required: true,
         },
-        episodeFileName: {
-            type: String,
-            required: true,
-        },
+        episodeVideoPath: { type: String, required: true, },
         episodeDescription: {
             type: String,
             required: true,

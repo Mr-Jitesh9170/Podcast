@@ -1,7 +1,7 @@
 import axios from "axios";
 
 let URL = 'http://localhost:8080'
-const connect = axios.create({
+export const connect = axios.create({
     baseURL: URL,
     timeout: 5000,
     headers: {

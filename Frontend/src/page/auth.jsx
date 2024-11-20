@@ -14,7 +14,7 @@ export const LogIn = () => {
   const [isLogin, setLogin] = useState(true)
   const { isClosed, setClosed } = useContext(IsLogginedContext);
   const [input, setInput] = useState(
-    { 
+    {
       name: "",
       email: "",
       password: ""
@@ -41,6 +41,8 @@ export const LogIn = () => {
       let data = await auth("/podcast/user/sign-in", { email: input.email, password: input.password });
       toast.success(data.message, alert)
       localStorage.setItem("token", data.token)
+      localStorage.setItem("userId", data.userId)
+      setClosed("")
       navigation("/podcast/search")
     }
   }
@@ -50,7 +52,7 @@ export const LogIn = () => {
     let { value, name } = e.target;
     setInput({ ...input, [name]: value })
   }
-  
+
   // switch sing in/sign up =>
   const isLoggined = () => {
     isLogin ? setLogin(false) : setLogin(true)
@@ -81,7 +83,7 @@ export const LogIn = () => {
               <div className="log-top4">
                 <input type="email" placeholder="enter email" name="email" value={input.email} onChange={handleInput} />
                 <input type="password" placeholder="enter password" name="password" value={input.password} onChange={handleInput} />
-                <a href="">forgot password ?</a>
+                <a href="##">forgot password ?</a>
               </div>
               <button name="sign-in" onClick={handleSubmit}>Sign In</button>
               <div className="log-top5">
