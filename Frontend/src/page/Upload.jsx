@@ -6,9 +6,12 @@ import { IsLogginedContext } from "../context/isLogined";
 import { ToastContainer, toast } from 'react-toastify';
 import { alert } from "../utils/alert";
 import 'react-toastify/dist/ReactToastify.css';
+import { createPodcast } from "../apis/upload";
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 export const Upload = () => {
+  const navigate = useNavigate()
   const { setClosed } = useContext(IsLogginedContext);
   const [next, setNext] = useState(true);
   const [uploadPod, setUploadPod] = useState(
@@ -24,14 +27,32 @@ export const Upload = () => {
       episodeDescription: ""
     }
   )
-  const handleUpload = () => {
+
+  // upload podcast =>
+  const handleUpload = async () => {
     for (let data in uploadPod) {
       if (!uploadPod[data]) {
         return toast.error(`${data} is missing!`, alert)
       }
     }
+    let uploadPodData = new FormData();
+    for (let data in uploadPod) {
+      if (data === "episodeImgPath" || data === "episodeVideoPath") {
+        uploadPodData.append(`imgAndVideo`, data)
+      } else {
+        uploadPodData.append(`${data}`, data)
+      }
+    }
+    let resPod = await createPodcast("/podcast/create", uploadPodData);
+    if (resPod) {
+      toast.success("Podcast uploaded!")
+      navigate("/podcast/profile")
+    } else {
+      toast.warning("Something went wrong!")
+    }
   }
 
+  // upload podcast change =>
   const uploadHandleChange = (e) => {
     let { value, name, files } = e.target;
     setUploadPod({ ...uploadPod, [name]: value ? value : files[0] })

@@ -2,6 +2,8 @@ const podcastUpload = require("../models/uploadPodcaste");
 
 exports.createPodcasteControllers = async (req, res, next) => {
     let reqBody = ["userId", "podcastName", "podcastDescriptions", "isMedia", "podcastCategory", "episodeName", "episodeDescription"]
+    console.log(req.body, "<---- body")
+
     let missinField = reqBody.filter((_) => {
         if (!req.body[_])
             return _;
@@ -13,9 +15,11 @@ exports.createPodcasteControllers = async (req, res, next) => {
         if (!req.files.length) {
             return res.json({ status: 200, message: "Podcast files missing!" })
         }
+        console.log(req.body, "<---- body")
+        console.log(req.files, "<--- files")
         let podcastImage = req.files[0].filename;
         let episodeFileName = req.files[1].filename;
-        await podcastUpload.create({ ...req.body, podcastImage, episodeFileName })
+        await podcastUpload.create({ ...req.body, episodeImgPath: podcastImage, episodeVideoPath: episodeFileName })
         return res.json({ status: 200, message: "Podcast created!" })
     } catch (error) {
         next(error)
