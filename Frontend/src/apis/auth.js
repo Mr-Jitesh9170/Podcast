@@ -3,10 +3,7 @@ import axios from "axios";
 let URL = 'http://localhost:8080'
 export const connect = axios.create({
     baseURL: URL,
-    timeout: 5000,
-    headers: {
-        'Content-Type': 'application/json',
-    }
+    timeout: 5000
 });
 
 // auth =>

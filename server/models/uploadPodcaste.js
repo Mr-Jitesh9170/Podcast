@@ -4,7 +4,7 @@ const uploadPodcastSchema = new Schema(
     {
         userId: {
             type: Schema.Types.ObjectId,
-            required: true,
+            required: "userId missing",
         },
         episodeImgPath: {
             type: String,
@@ -14,7 +14,7 @@ const uploadPodcastSchema = new Schema(
             type: String,
             required: true
         },
-        podcastDescriptions: {
+        podcastDescription: {
             type: String,
             required: true
         },
@@ -42,6 +42,10 @@ const uploadPodcastSchema = new Schema(
             required: true,
             default: 0,
         },
+        createdAt: {
+            type: Date,
+            default: Date.now
+        }
     }
 )
 

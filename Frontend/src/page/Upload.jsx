@@ -16,6 +16,7 @@ export const Upload = () => {
   const [next, setNext] = useState(true);
   const [uploadPod, setUploadPod] = useState(
     {
+      userId: localStorage.getItem("userId"),
       episodeImgPath: "",
       podcastName: "",
       podcastDescription: "",
@@ -35,12 +36,13 @@ export const Upload = () => {
         return toast.error(`${data} is missing!`, alert)
       }
     }
+    console.log(uploadPod)
     let uploadPodData = new FormData();
     for (let data in uploadPod) {
       if (data === "episodeImgPath" || data === "episodeVideoPath") {
-        uploadPodData.append(`imgAndVideo`, data)
+        uploadPodData.append(`imgAndVideo`, uploadPod[data])
       } else {
-        uploadPodData.append(`${data}`, data)
+        uploadPodData.append(`${data}`, uploadPod[data])
       }
     }
     let resPod = await createPodcast("/podcast/create", uploadPodData);
@@ -53,9 +55,13 @@ export const Upload = () => {
   }
 
   // upload podcast change =>
-  const uploadHandleChange = (e) => {
+  let uploadHandleChange = (e) => {
     let { value, name, files } = e.target;
-    setUploadPod({ ...uploadPod, [name]: value ? value : files[0] })
+    if (files) {
+      setUploadPod({ ...uploadPod, [name]: files[0] });
+    } else {
+      setUploadPod({ ...uploadPod, [name]: value })
+    }
   }
 
   const handleNext = () => {

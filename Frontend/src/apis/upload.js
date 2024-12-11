@@ -8,8 +8,11 @@ export const createPodcast = async (routes, podcastData) => {
         console.log(`${key}:`, value);
     }
     try {
-        let response = await connect.post(routes, podcastData);
-        console.log(response.data, "<--- data returned")
+        let response = await connect.post(routes, podcastData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
         return response.data;
     } catch (error) {
         console.log(error, "<-- error in create podcast!")
