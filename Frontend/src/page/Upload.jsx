@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { alert } from "../utils/alert";
 import 'react-toastify/dist/ReactToastify.css';
 import { createPodcast } from "../apis/upload";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 export const Upload = () => {
@@ -20,14 +20,20 @@ export const Upload = () => {
       episodeImgPath: "",
       podcastName: "",
       podcastDescription: "",
-      tagSeperatedBy: "",
-      isMedia: "",
-      podcastCategory: "",
+      isMedia: "Audio",
+      podcastCategory: "Culture",
       episodeName: "",
       episodeVideoPath: "",
       episodeDescription: ""
     }
   )
+  const [preview, setPreview] = useState(
+    {
+      imgPreview: ""
+    }
+  )
+
+
 
   // upload podcast =>
   const handleUpload = async () => {
@@ -36,7 +42,6 @@ export const Upload = () => {
         return toast.error(`${data} is missing!`, alert)
       }
     }
-    console.log(uploadPod)
     let uploadPodData = new FormData();
     for (let data in uploadPod) {
       if (data === "episodeImgPath" || data === "episodeVideoPath") {
@@ -59,7 +64,13 @@ export const Upload = () => {
     let { value, name, files } = e.target;
     if (files) {
       setUploadPod({ ...uploadPod, [name]: files[0] });
+      if (name === "episodeImgPath") {
+        const imgUrl = URL.createObjectURL(files[0]);
+        setPreview({ ...preview, imgPreview: imgUrl })
+      }
     } else {
+      console.log(value)
+
       setUploadPod({ ...uploadPod, [name]: value })
     }
   }
@@ -85,24 +96,34 @@ export const Upload = () => {
           <div className="upload-container">
             <p>Podcast details:</p>
             <div className="file-upload">
-              <span style={{ width: "40px" }}>{DashboardIcons.uploadIcon}</span>
-              <span>Click here to upload thumbnail</span>
-              <p>
-                <span>or</span>
-                <label for="inputUpload" >Browse Image</label>
-                <input name="episodeImgPath" id="inputUpload" type="file" style={{ display: "none" }} onChange={uploadHandleChange} />
-              </p>
+              {
+                uploadPod.episodeImgPath ? (
+                  <>
+                    <img src={preview.imgPreview} alt="" />
+                  </>
+                ) :
+                  (
+                    <>
+                      <span style={{ width: "40px" }}>{DashboardIcons.uploadIcon}</span>
+                      <span>Click here to upload thumbnail</span>
+                      <p>
+                        <span>or</span>
+                        <label for="inputUpload" >Browse Image</label>
+                        <input name="episodeImgPath" id="inputUpload" type="file" style={{ display: "none" }} onChange={uploadHandleChange} />
+                      </p>
+                    </>
+                  )
+              }
             </div>
-            <input name="podcastName" type="text" placeholder="Podcast-name* ..." value={uploadPod.podcastName} onChange={uploadHandleChange} />
+            <input name="podcastName" type="text" placeholder="Podcast-name*" value={uploadPod.podcastName} onChange={uploadHandleChange} />
             <textarea name="podcastDescription" placeholder="Podcast-descriptions* " value={uploadPod.podcastDescription} onChange={uploadHandleChange} id="" cols="20" rows="10" />
-            <textarea name="tagSeperatedBy" placeholder="Tags-separated by , " value={uploadPod.tagSeperatedBy} onChange={uploadHandleChange} id="" cols="20" rows="10" />
 
             <div className="upload-selection-box">
-              <select name="isMedia" className="selection-box" value={uploadPod.isMedia} onChange={uploadHandleChange} required>
-                <option value="Audio" >Audio</option>
+              <select name="isMedia" className="selection-box" value={uploadPod.isMedia} onChange={uploadHandleChange}  >
+                <option value="Audio"  >Audio</option>
                 <option value="Video">Video</option>
               </select>
-              <select name="podcastCategory" className="selection-box" value={uploadPod.podcastCategory} onChange={uploadHandleChange} required>
+              <select name="podcastCategory" className="selection-box" value={uploadPod.podcastCategory} onChange={uploadHandleChange}  >
                 {
                   UploadSelectionData.map((_, i) => {
                     return <option key={i} value={_}>{_}</option>
@@ -123,10 +144,9 @@ export const Upload = () => {
                   <input name="episodeVideoPath" id="inputUpload" type="file" style={{ display: "none" }} onChange={uploadHandleChange} />
                 </p>
               </div>
-              <input name="episodeName" type="text" placeholder="Episode-name* ..." value={uploadPod.episodeName} onChange={uploadHandleChange} />
+              <input name="episodeName" type="text" placeholder="Episode-name*" value={uploadPod.episodeName} onChange={uploadHandleChange} />
               <textarea name="episodeDescription" placeholder="Episode-descriptions* " id="" cols="20" rows="10" value={uploadPod.episodeDescription} onChange={uploadHandleChange} />
               <button >Delete</button>
-              <button >Preview Episode</button>
               <div className="buttons">
                 <button onClick={handlePrev}>Back</button>
                 <button onClick={handleUpload}>Create</button>
@@ -134,6 +154,6 @@ export const Upload = () => {
             </div>
           )
       }
-    </div>
+    </div >
   )
 }
