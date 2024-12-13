@@ -4,6 +4,8 @@ const cors = require("cors")
 const { mongoConnect } = require("./config/db.js")
 const { verifyToken } = require("./middleware/jwtAuth.js")
 const app = express();
+const path = require('path');
+
 
 
 // middleware =>
@@ -11,6 +13,8 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(require("./routes/authRoutes.js"));
+app.use(express.static('media'));
+
 
 // db connected => 
 mongoConnect();
@@ -18,8 +22,6 @@ mongoConnect();
 // routes => 
 app.use(require("./routes/podcasteRoutes.js"));
 app.use(verifyToken);
- 
-
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

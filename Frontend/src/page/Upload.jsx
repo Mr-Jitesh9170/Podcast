@@ -10,7 +10,7 @@ import { createPodcast } from "../apis/upload";
 import { useNavigate } from "react-router-dom";
 
 
-export const Upload = () => {
+const Upload = () => {
   const navigate = useNavigate()
   const { setClosed } = useContext(IsLogginedContext);
   const [next, setNext] = useState(true);
@@ -157,3 +157,6 @@ export const Upload = () => {
     </div >
   )
 }
+
+
+export default Upload

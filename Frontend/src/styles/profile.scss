@@ -1,4 +1,5 @@
 .your-profile-container {
+  overflow-y: scroll;
   width: 100%;
   height: 100%;
   padding: 25px 40px;
@@ -22,13 +23,23 @@
       }
     }
   }
-  .your-profile-top2 {
+
+  .your-profile-top2,
+  .your-favourites-top2 {
     width: 100%;
     height: 100%;
     padding: 25px 30px;
-
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
     h2 {
       align-self: flex-start;
+    }
+    .yourPodcast {
+      display: flex;
+      gap: 20px;
+      flex-wrap: nowrap;
+      overflow-y: scroll;
     }
   }
 }

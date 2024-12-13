@@ -4,6 +4,7 @@ const uploadPodcastSchema = new Schema(
     {
         userId: {
             type: Schema.Types.ObjectId,
+            ref: "users",
             required: "userId missing",
         },
         episodeImgPath: {

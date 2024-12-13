@@ -1,10 +1,10 @@
 import "../styles/DashBoard.scss"
 import { useState } from "react";
-import { DashBoardData } from "../data/data"
+import { DashBoardData } from "../data/data.jsx"
 import { Card } from "../components/card/card.jsx";
 
 
-export const DashBoard = () => {
+const DashBoard = () => {
   const [full, setFull] = useState(true)
 
   return (
@@ -32,4 +32,6 @@ export const DashBoard = () => {
       }
     </div>
   )
-} 
+}
+
+export default DashBoard

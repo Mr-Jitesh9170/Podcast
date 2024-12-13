@@ -18,7 +18,7 @@ const Scheama = new mongoose.Schema(
     },
     token: [String]
   }
-)
+) 
 
 // models =>
 module.exports = mongoose.model("users", Scheama);

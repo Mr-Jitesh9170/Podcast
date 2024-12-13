@@ -22,7 +22,7 @@ exports.signUpControllers = async (req, res) => {
     } catch (error) {
         console.log(error, "<--- error in signup controllers!")
         res.json({ status: 500, message: "Internal server error!" })
-    } 
+    }
 }
 
 exports.signInControllers = async (req, res) => {
@@ -30,13 +30,13 @@ exports.signInControllers = async (req, res) => {
     try {
         let user = await userModel.findOne({ email })
         if (!user) {
-            return res.json({ status: 200, message: "User does not exists!" })
+            return res.json({ status: 200, message: "Register first!" })
         }
         let isPassword = bcrypt.compare(password, user.password);
         if (!isPassword) {
             return res.json({ status: 200, message: "User password is wrong!" })
         }
-        const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user._id, name: user.name, email }, process.env.SECRET_KEY, { expiresIn: '1d' });
         res.json({ status: 200, message: "User sign in successfully!", token, userId: user._id })
     } catch (error) {
         console.log(error, "<--- error in sign controllers!")

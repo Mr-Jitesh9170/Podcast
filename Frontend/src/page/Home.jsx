@@ -7,7 +7,7 @@ import { IsLogginedContext, isUserContext } from "../context/isLogined";
 import { Circuler } from "../components/circuler/circuler";
 import { LogIn } from "./auth";
 
-export const Home = () => {
+const Home = () => {
   const [isLeftDashboard, setLeftDashboard] = useState(true);
   const { isClosed, setClosed } = useContext(IsLogginedContext);
   const { isUser } = useContext(isUserContext);
@@ -79,3 +79,6 @@ export const Home = () => {
     </div >
   )
 }
+
+
+export default Home

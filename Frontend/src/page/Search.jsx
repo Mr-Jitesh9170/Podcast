@@ -1,7 +1,8 @@
 import "../styles/search.scss"
 import { DashboardIcons, SearchData } from "../data/data";
 import { useState } from "react";
-export const Search = () => {
+
+const Search = () => {
   const [search, setSearch] = useState('');
   const handleSearch = (e) => {
     setSearch(e.target.value)
@@ -30,4 +31,6 @@ export const Search = () => {
       </div>
     </div>
   )
-} 
+}
+
+export default Search;
