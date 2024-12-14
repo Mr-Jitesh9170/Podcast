@@ -37,7 +37,7 @@ exports.signInControllers = async (req, res) => {
             return res.json({ status: 200, message: "User password is wrong!" })
         }
         const token = jwt.sign({ userId: user._id, name: user.name, email }, process.env.SECRET_KEY, { expiresIn: '1d' });
-        res.json({ status: 200, message: "User sign in successfully!", token, userId: user._id })
+        res.json({ status: 200, message: "User sign in successfully!", token })
     } catch (error) {
         console.log(error, "<--- error in sign controllers!")
         res.json({ status: 500, message: "Internal server error!" })

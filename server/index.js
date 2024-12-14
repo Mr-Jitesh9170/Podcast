@@ -21,6 +21,7 @@ mongoConnect();
 
 // routes => 
 app.use(require("./routes/podcasteRoutes.js"));
+app.use(require("./routes/profileRoutes.js"))
 app.use(verifyToken);
 
 app.use((err, req, res, next) => {

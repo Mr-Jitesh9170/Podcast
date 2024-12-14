@@ -3,9 +3,9 @@ import { connect } from "../apis/auth.js";
 
 
 // upload podcast =>
-export const createPodcast = async (routes, podcastData) => {
+export const createPodcast = async (podcastData) => {
     try {
-        let response = await connect.post(routes, podcastData, {
+        let response = await connect.post("/podcast/create", podcastData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
@@ -24,7 +24,7 @@ export const yourPodcastLists = async (userId, setPodcLists) => {
     }
     try {
         let response = await connect.post("/podcast/lists", { userId });
-        return setPodcLists(response.data.podcastLists);
+        return setPodcLists((prev) => ({ ...prev, podcastLists: response.data.podcastLists }));
     } catch (error) {
         console.log(error, "<-- error in your podcast lists!")
     }

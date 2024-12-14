@@ -1,9 +1,56 @@
 const podcastUpload = require("../models/uploadPodcaste");
+const favouritesPodModel = require("../models/favouritesPodcast")
 
+
+
+// add/remove favourite podcasts =>
+exports.addOrRemoveFavouritePod = async (req, res, next) => {
+    let { userId, podcastId, isFavourite } = req.body
+    if (!userId || !podcastId || typeof isFavourite !== "boolean") {
+        return res.json({ status: 400, message: "Field missing!" })
+    }
+    try {
+        if (isFavourite) {
+            await favouritesPodModel.create({ userId, podcastId })
+            return res.json({ status: 201, message: "Added to your favourite lists!" })
+        }
+        await favouritesPodModel.findOneAndDelete({ userId, podcastId });
+        res.json({ status: 200, message: "Removed from your favourite lists!" })
+    } catch (error) {
+        next(error)
+    }
+}
+
+// your favourite podcast lists =>
+exports.userFavouritesPodcastLists = async (req, res, next) => {
+    let { userId } = req.body
+    if (!userId) {
+        return res.json({ status: 400, message: "Field missing!" })
+    }
+    try {
+        let favritePodLists = await favouritesPodModel.find({ userId }).populate(
+            [
+                {
+                    path: "userId",
+                    select: "-password -token -email"
+                },
+                {
+                    path: "podcastId"
+                }
+            ]
+        )
+        if (!favritePodLists.length) {
+            return res.json({ status: 404, message: "No favourite podcast found!" })
+        }
+        res.json({ status: 200, message: "Your favourite podcasts!", favritePodLists })
+    } catch (error) {
+        next(error)
+    }
+}
 
 
 // your upload =>
-exports.yourUploadPodcastLists = async (req, res) => {
+exports.yourUploadPodcastLists = async (req, res, next) => {
     let { userId } = req.body
     if (!userId) {
         return res.json({ status: 400, message: "userId missing!" })

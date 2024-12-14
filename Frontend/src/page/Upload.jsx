@@ -2,7 +2,7 @@ import "../styles/Upload.scss"
 import { DashboardIcons, UploadSelectionData } from "../data/data"
 import { IoMdCloudUpload } from "react-icons/io";
 import { useContext, useState } from "react";
-import { IsLogginedContext } from "../context/isLogined";
+import { IsLogginedContext, isUserContext } from "../context/isLogined";
 import { ToastContainer, toast } from 'react-toastify';
 import { alert } from "../utils/alert";
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,12 +11,13 @@ import { useNavigate } from "react-router-dom";
 
 
 const Upload = () => {
+  const { isUser } = useContext(isUserContext)
   const navigate = useNavigate()
   const { setClosed } = useContext(IsLogginedContext);
   const [next, setNext] = useState(true);
   const [uploadPod, setUploadPod] = useState(
     {
-      userId: localStorage.getItem("userId"),
+      userId: isUser,
       episodeImgPath: "",
       podcastName: "",
       podcastDescription: "",
@@ -32,10 +33,6 @@ const Upload = () => {
       imgPreview: ""
     }
   )
-
-
-
-  // upload podcast =>
   const handleUpload = async () => {
     for (let data in uploadPod) {
       if (!uploadPod[data]) {
@@ -50,16 +47,15 @@ const Upload = () => {
         uploadPodData.append(`${data}`, uploadPod[data])
       }
     }
-    let resPod = await createPodcast("/podcast/create", uploadPodData);
+    let resPod = await createPodcast(uploadPodData);
     if (resPod) {
       toast.success("Podcast uploaded!")
       navigate("/podcast/profile")
+      setClosed("")
     } else {
       toast.warning("Something went wrong!")
     }
   }
-
-  // upload podcast change =>
   let uploadHandleChange = (e) => {
     let { value, name, files } = e.target;
     if (files) {
@@ -74,7 +70,6 @@ const Upload = () => {
       setUploadPod({ ...uploadPod, [name]: value })
     }
   }
-
   const handleNext = () => {
     setNext(false)
   }

@@ -14,7 +14,7 @@ export const IsLoginnedProvider = ({ children }) => {
 // is user loggined =>
 export const isUserContext = createContext();
 export const IsUserProvider = ({ children }) => {
-    const [isUser, setUser] = useState(localStorage.getItem("token"))
+    const [isUser, setUser] = useState(localStorage.getItem("userId"))
     return (
         <isUserContext.Provider value={{ isUser, setUser }}>
             {children}

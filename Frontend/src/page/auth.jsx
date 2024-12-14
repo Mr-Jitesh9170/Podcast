@@ -2,17 +2,20 @@ import "../styles/auth.scss";
 import GoogleIcon from "../Assets/google.webp";
 import { DashboardIcons } from "../data/data";
 import { useState, useContext } from "react";
-import { IsLogginedContext } from "../context/isLogined";
+import { IsLogginedContext, } from "../context/isLogined";
 import { auth } from "../apis/auth";
 import { useNavigate } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { alert } from "../utils/alert";
+import { jwtDecode } from "jwt-decode";
+
 
 export const LogIn = () => {
   const navigation = useNavigate();
   const [isLogin, setLogin] = useState(true)
   const { isClosed, setClosed } = useContext(IsLogginedContext);
+
   const [input, setInput] = useState(
     {
       name: "",
@@ -40,8 +43,8 @@ export const LogIn = () => {
       }
       let data = await auth("/podcast/user/sign-in", { email: input.email, password: input.password });
       toast.success(data.message, alert)
-      localStorage.setItem("token", data.token)
-      localStorage.setItem("userId", data.userId)
+      const decodeToken = jwtDecode(data.token)
+      localStorage.setItem("userId", decodeToken.userId)
       setClosed("")
       navigation("/podcast/search")
     }
@@ -61,6 +64,8 @@ export const LogIn = () => {
   const handleClosed = () => {
     isClosed ? setClosed(false) : setClosed(true)
   }
+
+
   return (
     <>
       {
