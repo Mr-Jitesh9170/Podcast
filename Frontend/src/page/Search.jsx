@@ -20,7 +20,7 @@ const Search = () => {
               return (
                 <>
                   <div className="search-boxes" style={{ backgroundColor: `${color}` }}>
-                    <div>{name}</div>
+                    <div className="name">{name}</div>
                     <img src={img} alt="" />
                   </div>
                 </>

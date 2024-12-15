@@ -19,7 +19,7 @@ const Favourites = ({ Name }) => {
     setAdded(!isAdded);
     setFavourites({ podcastId, userId: localStorage.getItem("userId"), isFavourite: isAdded })
   }
- 
+
   useEffect(() => {
     if (favourite.podcastId) {
       addOrRemoveFavouritePod(favourite)
@@ -34,10 +34,10 @@ const Favourites = ({ Name }) => {
       <div className="your-favourites-content">
         {
           favouritesLists?.map((favPodcast) => {
-            return <Card isAdded={isAdded} handleCard={() => handleCard(favPodcast.podcastId._id)} thumbNail={favPodcast.podcastId.episodeImgPath} name={favPodcast.userId.name} episodeName={favPodcast.podcastId.episodeName} episodeDes={favPodcast.podcastId.episodeDescription} />
+            return <Card isMedia={favPodcast.podcastId.isMedia} isAdded={isAdded} handleCard={() => handleCard(favPodcast.podcastId._id)} thumbNail={favPodcast.podcastId.episodeImgPath} name={favPodcast.userId.name} episodeName={favPodcast.podcastId.episodeName} episodeDes={favPodcast.podcastId.episodeDescription} />
           })
         }
-      </div>
+      </div> 
     </div>
   )
 }

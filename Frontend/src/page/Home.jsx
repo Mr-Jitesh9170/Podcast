@@ -11,42 +11,47 @@ const Home = () => {
   const [isLeftDashboard, setLeftDashboard] = useState(true);
   const { isClosed, setClosed } = useContext(IsLogginedContext);
   const { isUser } = useContext(isUserContext);
- 
- 
+  const [tabName, setTabName] = useState(null);
+
+
   const handleResize = () => {
     isLeftDashboard ? setLeftDashboard(false) : setLeftDashboard(true)
   }
   return (
     <div className="podcaste-container">
       {
-        isLeftDashboard && <div className="left-container">
-          <div className="left-container-top">
-            <img src={Logo} alt="" />
-            <span>PODCAST</span>
+        isLeftDashboard &&
+        (
+          <div className="left-container">
+            <div className="left-container-top">
+              <img src={Logo} alt="" />
+              <span>PODCAST</span>
+            </div>
+            {
+              leftDashBoard.map(({ name, img, route }, i) => {
+                return (
+                  <>
+                    {
+                      i === 3 && <hr />
+                    }
+                    <Link to={route} className="bottom-data" key={i} onClick={() => {
+                      setTabName(name)
+                      i > 2 ? setClosed(route) : setClosed("")
+                    }} >
+                      <div className="img" >{img}</div>
+                      <div className="left-name" >{name}</div>
+                    </Link>
+                  </>
+                )
+              })
+            }
           </div>
-          {
-            leftDashBoard.map(({ name, img, route }, i) => {
-              return (
-                <>
-                  {
-                    i === 3 && <hr />
-                  }
-                  <Link to={route} className="bottom-data" key={i} onClick={() => {
-                    i > 2 ? setClosed(route) : setClosed("")
-                  }} >
-                    <div className="img" >{img}</div>
-                    <div className="left-name" >{name}</div>
-                  </Link>
-                </>
-              )
-            })
-          }
-        </div>
+        )
       }
       <div className="right-container" style={isLeftDashboard ? null : { width: "100%" }}>
         <div className="right-container-top">
           <div className="threedashIcon" onClick={handleResize} >{DashboardIcons.threeDashIcon}</div>
-          <h3>Podcaste</h3>
+          <h1>&lt; {tabName??"Welcome!"} /&gt;</h1>
           {
             isUser ?
               (
