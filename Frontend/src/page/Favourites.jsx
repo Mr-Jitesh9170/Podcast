@@ -1,14 +1,40 @@
 import "../styles/Favourites.scss"
-import { AllFavourites } from "../data/data"
 import { Card } from "../components/card/card"
+import { useEffect, useState } from "react"
+import { addOrRemoveFavouritePod, favouritePodLists } from "../apis/upload"
+
+
 const Favourites = ({ Name }) => {
+  const [favouritesLists, setFavouritesLists] = useState([]);
+  const [favourite, setFavourites] = useState(
+    {
+      isFavourite: "",
+      podcastId: "",
+      userId: ""
+    }
+  )
+  const [isAdded, setAdded] = useState(false)
+
+  const handleCard = (podcastId) => {
+    setAdded(!isAdded);
+    setFavourites({ podcastId, userId: localStorage.getItem("userId"), isFavourite: isAdded })
+  }
+ 
+  useEffect(() => {
+    if (favourite.podcastId) {
+      addOrRemoveFavouritePod(favourite)
+    }
+    favouritePodLists(localStorage.getItem("userId"), setFavouritesLists);
+  }, [favourite])
+
+
   return (
     <div className="favourites-container">
-      <h2>{Name}</h2>
+      <h2>Favourites</h2>
       <div className="your-favourites-content">
         {
-          AllFavourites.map((_) => {
-            return <Card />
+          favouritesLists?.map((favPodcast) => {
+            return <Card isAdded={isAdded} handleCard={() => handleCard(favPodcast.podcastId._id)} thumbNail={favPodcast.podcastId.episodeImgPath} name={favPodcast.userId.name} episodeName={favPodcast.podcastId.episodeName} episodeDes={favPodcast.podcastId.episodeDescription} />
           })
         }
       </div>

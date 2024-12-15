@@ -11,7 +11,7 @@ const favouritesPodcasts = new Schema(
             type: Schema.Types.ObjectId,
             ref: "Podcast",
             required: "podcastId missing!",
-        },
+        }, 
     }
 )
 

@@ -13,7 +13,6 @@ const Profile = () => {
         }
     );
 
-
     useEffect(() => {
         userProfileView(localStorage.getItem("userId"), setProfile)
         yourPodcastLists(localStorage.getItem("userId"), setProfile);

@@ -6,6 +6,7 @@ const favouritesPodModel = require("../models/favouritesPodcast")
 // add/remove favourite podcasts =>
 exports.addOrRemoveFavouritePod = async (req, res, next) => {
     let { userId, podcastId, isFavourite } = req.body
+    console.log(req.body)
     if (!userId || !podcastId || typeof isFavourite !== "boolean") {
         return res.json({ status: 400, message: "Field missing!" })
     }

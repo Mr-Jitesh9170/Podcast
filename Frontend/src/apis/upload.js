@@ -1,7 +1,5 @@
 import { connect } from "../apis/auth.js";
 
-
-
 // upload podcast =>
 export const createPodcast = async (podcastData) => {
     try {
@@ -27,5 +25,29 @@ export const yourPodcastLists = async (userId, setPodcLists) => {
         return setPodcLists((prev) => ({ ...prev, podcastLists: response.data.podcastLists }));
     } catch (error) {
         console.log(error, "<-- error in your podcast lists!")
+    }
+}
+
+// favourite podcast lists =>
+export const favouritePodLists = async (userId, setFavouritesLists) => {
+    if (!userId) {
+        return console.log("userId missing in favouritePodLists!")
+    }
+    try {
+        let response = await connect.post("/podcast/favourite-podcast-lists", { userId });
+        return setFavouritesLists(response.data.favritePodLists);
+    } catch (error) {
+        console.log(error, "<-- error in favouritePodLists lists!")
+    }
+}
+
+// add/remove favrourite podcasts =>
+export const addOrRemoveFavouritePod = async (favourite) => {
+    try {
+        let results = await connect.post("/podcast/add-or-remove-favourite-podcasts",  favourite );
+        console.log(favourite)
+        console.log(results.data)
+    } catch (error) {
+        console.log(error, "<-- error in addOrRemoveFavouritePod!")
     }
 }

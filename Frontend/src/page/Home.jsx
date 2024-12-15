@@ -11,9 +11,8 @@ const Home = () => {
   const [isLeftDashboard, setLeftDashboard] = useState(true);
   const { isClosed, setClosed } = useContext(IsLogginedContext);
   const { isUser } = useContext(isUserContext);
-
-  console.log(isUser)
-
+ 
+ 
   const handleResize = () => {
     isLeftDashboard ? setLeftDashboard(false) : setLeftDashboard(true)
   }
