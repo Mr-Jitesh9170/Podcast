@@ -2,6 +2,29 @@ const podcastUpload = require("../models/uploadPodcaste");
 const favouritesPodModel = require("../models/favouritesPodcast")
 
 
+// categor wise podcasts =>
+exports.categoryWisePodlists = async (req, res) => {
+    let { podcastCategory } = req.body;
+    if (!podcastCategory) {
+        return res.json({ status: 400, message: "Podcast category missing!" })
+    }
+    try {
+        let podcastCategoryLists = await podcastUpload.find({ podcastCategory: { $regex: podcastCategory, $options: "i" } }).populate(
+            [
+                {
+                    path: "userId",
+                    select: "-password -token -email"
+                }
+            ]
+        )
+        if (!podcastCategoryLists.length) {
+            return res.json({ status: 404, message: `No podcast related to ${podcastCategory.toLowerCase()} category!`, podcastCategoryLists: [] })
+        }
+        res.json({ status: 200, message: `${podcastCategory} lists!`, podcastCategoryLists })
+    } catch (error) {
+        next(error)
+    }
+}
 
 // add/remove favourite podcasts =>
 exports.addOrRemoveFavouritePod = async (req, res, next) => {

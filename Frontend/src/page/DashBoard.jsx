@@ -10,7 +10,7 @@ const DashBoard = () => {
   return (
     <div className="Dashboard-container">
       {
-        DashBoardData.map(({ name, data }) => {
+        DashBoardData.map(({ name, data }) => { 
           return (
             <div className="dashboard-child-container" style={{ height: full ? "100%" : null }}>
               <div className="child-top">

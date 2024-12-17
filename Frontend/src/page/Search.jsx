@@ -1,6 +1,7 @@
 import "../styles/search.scss"
 import { DashboardIcons, SearchData } from "../data/data";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Search = () => {
   const [search, setSearch] = useState('');
@@ -18,12 +19,10 @@ const Search = () => {
           SearchData.map(({ name, color, img }) => {
             if (name.toLocaleLowerCase().includes(search.trim().toLocaleLowerCase())) {
               return (
-                <>
-                  <div className="search-boxes" style={{ backgroundColor: `${color}` }}>
-                    <div className="name">{name}</div>
-                    <img src={img} alt="" />
-                  </div>
-                </>
+                <Link className="search-boxes" style={{ backgroundColor: `${color}` }} to={`/podcast/search/${name.toLowerCase()}`}  >
+                  <div className="name">{name}</div>
+                  <img src={img} alt="" />
+                </Link>
               )
             }
           })

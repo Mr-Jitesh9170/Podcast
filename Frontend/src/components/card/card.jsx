@@ -1,9 +1,7 @@
 import "./card.scss"
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { RiAccountCircleFill } from "react-icons/ri";
- 
-
-
+  
 export const Card = ({ isMedia, thumbNail, episodeName, episodeDes, name, viewCount, handleCard, isAdded }) => {
   return (
     <div className={`cardContainer ${isMedia === "Audio" ? "audio" : "video"}`}>

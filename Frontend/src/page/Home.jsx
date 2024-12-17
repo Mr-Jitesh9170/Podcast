@@ -18,7 +18,7 @@ const Home = () => {
     isLeftDashboard ? setLeftDashboard(false) : setLeftDashboard(true)
   }
   return (
-    <div className="podcaste-container">
+    <div className="podcaste-container"> 
       {
         isLeftDashboard &&
         (

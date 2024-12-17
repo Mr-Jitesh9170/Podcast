@@ -1,5 +1,16 @@
 import { connect } from "../apis/auth.js";
 
+
+// category lists podcast =>
+export const categoryLists = async (podcastCategory, setCategoryLists) => {
+    try {
+        let response = await connect.post("/podcast/category-podcast-lists", { podcastCategory });
+        return setCategoryLists(response.data?.podcastCategoryLists);
+    } catch (error) {
+        console.log(error, "<-- error in create podcast!")
+    }
+}
+
 // upload podcast =>
 export const createPodcast = async (podcastData) => {
     try {
@@ -44,7 +55,7 @@ export const favouritePodLists = async (userId, setFavouritesLists) => {
 // add/remove favrourite podcasts =>
 export const addOrRemoveFavouritePod = async (favourite) => {
     try {
-        let results = await connect.post("/podcast/add-or-remove-favourite-podcasts",  favourite );
+        let results = await connect.post("/podcast/add-or-remove-favourite-podcasts", favourite);
         console.log(favourite)
         console.log(results.data)
     } catch (error) {
