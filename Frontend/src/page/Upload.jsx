@@ -1,5 +1,5 @@
 import "../styles/Upload.scss"
-import { DashboardIcons, UploadSelectionData } from "../data/data"
+import { DashboardIcons, categories } from "../data/data"
 import { IoMdCloudUpload } from "react-icons/io";
 import { useContext, useState } from "react";
 import { IsLogginedContext, isUserContext } from "../context/isLogined";
@@ -10,7 +10,7 @@ import { createPodcast } from "../apis/upload";
 import { useNavigate } from "react-router-dom";
 
 
-const Upload = () => {
+const Upload = () => { 
   const { isUser } = useContext(isUserContext)
   const navigate = useNavigate()
   const { setClosed } = useContext(IsLogginedContext);
@@ -120,7 +120,7 @@ const Upload = () => {
               </select>
               <select name="podcastCategory" className="selection-box" value={uploadPod.podcastCategory} onChange={uploadHandleChange}  >
                 {
-                  UploadSelectionData.map((_, i) => {
+                  categories.map((_, i) => {
                     return <option key={i} value={_}>{_}</option>
                   })
                 }

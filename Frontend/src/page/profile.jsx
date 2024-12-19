@@ -4,6 +4,8 @@ import { Circuler } from "../components/circuler/circuler"
 import "../styles/profile.scss"
 import { yourPodcastLists } from "../apis/upload";
 import { userProfileView } from "../apis/profile";
+import { MdEmail } from "react-icons/md";
+
 
 const Profile = () => {
     const [profile, setProfile] = useState(
@@ -12,7 +14,6 @@ const Profile = () => {
             podcastLists: []
         }
     );
-
     useEffect(() => {
         userProfileView(localStorage.getItem("userId"), setProfile)
         yourPodcastLists(localStorage.getItem("userId"), setProfile);
@@ -26,7 +27,8 @@ const Profile = () => {
                 <div className="email-and-name">
                     <h1>{profile.profileData?.name}</h1>
                     <p>
-                        Email :  <a href="76"> {profile.profileData?.email}</a>
+                        <MdEmail size={20} />
+                        <p>{profile.profileData?.email}</p>
                     </p>
                 </div>
             </div>
@@ -35,7 +37,7 @@ const Profile = () => {
                 <div className="yourPodcast">
                     {
                         profile?.podcastLists.map((podcast) => {
-                            return <Card thumbNail={podcast.episodeImgPath} name={podcast.userId.name} episodeName={podcast?.episodeName} episodeDes={podcast?.episodeDescription} />
+                            return <Card podcast={podcast} />
                         })
                     }
                 </div>

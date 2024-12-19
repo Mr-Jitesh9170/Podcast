@@ -9,7 +9,7 @@ const Home = lazy(() => import("./page/home.jsx"))
 const DashBoard = lazy(() => import("./page/dashBoard.jsx"))
 const Search = lazy(() => import("./page/search.jsx"))
 const Favourites = lazy(() => import("./page/favourites.jsx"))
-const Profile = lazy(() => import("./page/profile.jsx"))
+const Profile = lazy(() => import("./page/profile.jsx")) 
 
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
             <Route path="/podcast/profile" element={<Profile />} />
             <Route path="/podcast/search/:category" element={<Category />} />
             <Route path="/podcast/play/:video" element={<Video />} />
-          </Route>
+          </Route> 
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>

@@ -12,7 +12,7 @@ const Search = () => {
     <div className="search-container">
       <div className="search-Top">
         <div className="search-top-icon" >{DashboardIcons.searchIcon}</div>
-        <input type="text" placeholder="Search Artist/Podcast....." value={search} onChange={e => handleSearch(e)} />
+        <input type="text" placeholder="Search Artist/Podcast" value={search} onChange={e => handleSearch(e)} />
       </div>
       <div className="search-bottom">
         {
@@ -23,7 +23,7 @@ const Search = () => {
                   <div className="name">{name}</div>
                   <img src={img} alt="" />
                 </Link>
-              )
+              ) 
             }
           })
         }

@@ -16,11 +16,11 @@ const Category = () => {
     return (
         <div className="categoryContainer">
             <div className="categorylists">
-                <h1>{category}</h1>
+                <h2>{category}</h2>
                 <div className="card" >
                     {
                         categorylists?.map((categrylist) => {
-                            return <Card isMedia={categrylist.isMedia} thumbNail={categrylist.episodeImgPath} name={categrylist.userId.name} episodeName={categrylist.episodeName} episodeDes={categrylist.episodeDescription} />
+                            return <Card podcast={categrylist} />
                         })
                     }
                 </div>

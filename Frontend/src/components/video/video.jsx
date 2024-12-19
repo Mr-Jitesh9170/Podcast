@@ -13,10 +13,10 @@ export const Video = () => {
                         <source src={ben10} type="video/mp4" />
                     </video>
                 </div>
-                <div className="episodeDescriptions">
+                <div className="episodeDescriptions"  >
                     ✖️
                 </div>
             </div>
-        </div>
+        </div> 
     )
 }

@@ -33,11 +33,11 @@ const Favourites = ({ Name }) => {
       <h2>Favourites</h2>
       <div className="your-favourites-content">
         {
-          favouritesLists?.map((favPodcast) => {
-            return <Card isMedia={favPodcast.podcastId.isMedia} isAdded={isAdded} handleCard={() => handleCard(favPodcast.podcastId._id)} thumbNail={favPodcast.podcastId.episodeImgPath} name={favPodcast.userId.name} episodeName={favPodcast.podcastId.episodeName} episodeDes={favPodcast.podcastId.episodeDescription} />
+          favouritesLists?.map(({ podcastId, userId }) => {
+            return <Card isAdded={isAdded} podcast={{ ...podcastId, ...userId }} />
           })
         }
-      </div> 
+      </div>
     </div>
   )
 }

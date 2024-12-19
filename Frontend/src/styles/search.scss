@@ -14,17 +14,18 @@
     border-radius: 25px;
     font-size: 18px;
     transition: all 0.4s;
-
     .search-top-icon {
       padding-right: 5px;
-      fill: #fff;
+      color: #a64d79;
     }
     input {
       outline: none;
       background-color: #3b1c32;
       width: calc(100% - 8%);
       border: none;
-      color: #fff;
+      color: #a64d79;
+      font-weight: 500;
+      font-size: 17px;
     }
     &:hover {
       border: 1px solid #fff;
