@@ -2,10 +2,10 @@ import { connect } from "../apis/auth.js";
 
 
 // category lists podcast =>
-export const categoryLists = async (podcastCategory, setCategoryLists) => {
+export const categoryLists = async (podcastCategory) => {
     try {
         let response = await connect.post("/podcast/category-podcast-lists", { podcastCategory });
-        return setCategoryLists(response.data?.podcastCategoryLists);
+        return  response.data?.podcastCategoryLists
     } catch (error) {
         console.log(error, "<-- error in create podcast!")
     }

@@ -14,7 +14,7 @@ exports.categoryWisePodlists = async (req, res) => {
                 {
                     path: "userId",
                     select: "-password -token -email"
-                }
+                } 
             ]
         )
         if (!podcastCategoryLists.length) {

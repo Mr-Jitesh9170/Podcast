@@ -43,7 +43,7 @@ export const leftDashBoard = [
   {
     name: "Dashboard",
     img: HomeIcon,
-    route: "/podcast/dashboard"
+    route: "/"
   },
   {
     name: "Search",
@@ -73,7 +73,7 @@ export const leftDashBoard = [
 
 
 
-export const SearchData = [
+export const podcastCategories = [
   {
     name: "Culture",
     img: "https://media.npr.org/assets/img/2020/12/07/99percent_custom-ad44d7569e602b2698267142396e71e91c539149.jpg",
@@ -141,4 +141,3 @@ export const SearchData = [
 //  =============================== UPLOAD PAGE DATA ======================================>
 // =====================================================================================>
 
-export const categories = ["Culture", "Business", "Education", "Health", "Comedy", "News", "Science", "History", "Religion", "Developements", "Sports", "Crime"]

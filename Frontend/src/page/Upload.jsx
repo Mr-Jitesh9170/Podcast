@@ -1,5 +1,5 @@
 import "../styles/Upload.scss"
-import { DashboardIcons, categories } from "../data/data"
+import { DashboardIcons, podcastCategories } from "../data/data"
 import { IoMdCloudUpload } from "react-icons/io";
 import { useContext, useState } from "react";
 import { IsLogginedContext, isUserContext } from "../context/isLogined";
@@ -10,7 +10,7 @@ import { createPodcast } from "../apis/upload";
 import { useNavigate } from "react-router-dom";
 
 
-const Upload = () => { 
+const Upload = () => {
   const { isUser } = useContext(isUserContext)
   const navigate = useNavigate()
   const { setClosed } = useContext(IsLogginedContext);
@@ -112,7 +112,6 @@ const Upload = () => {
             </div>
             <input name="podcastName" type="text" placeholder="Podcast-name*" value={uploadPod.podcastName} onChange={uploadHandleChange} />
             <textarea name="podcastDescription" placeholder="Podcast-descriptions* " value={uploadPod.podcastDescription} onChange={uploadHandleChange} id="" cols="20" rows="10" />
-
             <div className="upload-selection-box">
               <select name="isMedia" className="selection-box" value={uploadPod.isMedia} onChange={uploadHandleChange}  >
                 <option value="Audio"  >Audio</option>
@@ -120,8 +119,8 @@ const Upload = () => {
               </select>
               <select name="podcastCategory" className="selection-box" value={uploadPod.podcastCategory} onChange={uploadHandleChange}  >
                 {
-                  categories.map((_, i) => {
-                    return <option key={i} value={_}>{_}</option>
+                  podcastCategories.map(({ name }, i) => {
+                    return <option key={i} value={name}>{name}</option>
                   })
                 }
               </select>

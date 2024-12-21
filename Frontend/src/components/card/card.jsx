@@ -22,7 +22,7 @@ export const Card = ({ podcast, handleCard, isAdded }) => {
             <div className="img">
               <RiAccountCircleFill size={20} />
             </div>
-            <span>{podcast?.userId.name ?? "Unknown"}</span>
+            <span>{podcast?.userId.name ?? "Unknown"}</span> 
           </div>
           <span> • {podcast?.viewCount ?? 0} views</span>
         </div>

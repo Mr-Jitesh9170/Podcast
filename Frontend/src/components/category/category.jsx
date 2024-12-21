@@ -8,11 +8,13 @@ const Category = () => {
     const { category } = useParams();
     const [categorylists, setCategoryLists] = useState([])
 
-
+    const getCategoryData = async () => {
+        let categoryData = await categoryLists(category);
+        setCategoryLists(categoryData);
+    }
     useEffect(() => {
-        categoryLists(category, setCategoryLists)
+        getCategoryData();
     }, [])
-
     return (
         <div className="categoryContainer">
             <div className="categorylists">

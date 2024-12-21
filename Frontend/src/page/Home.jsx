@@ -13,12 +13,11 @@ const Home = () => {
   const { isUser } = useContext(isUserContext);
   const [tabName, setTabName] = useState(null);
 
-
   const handleResize = () => {
     isLeftDashboard ? setLeftDashboard(false) : setLeftDashboard(true)
   }
   return (
-    <div className="podcaste-container"> 
+    <div className="podcaste-container">
       {
         isLeftDashboard &&
         (
@@ -31,9 +30,7 @@ const Home = () => {
               leftDashBoard.map(({ name, img, route }, i) => {
                 return (
                   <>
-                    {
-                      i === 3 && <hr />
-                    }
+                    {i === 3 && <hr />}
                     <Link to={route} className="bottom-data" key={i} onClick={() => {
                       setTabName(name)
                       i > 2 ? setClosed(route) : setClosed("")
@@ -51,7 +48,7 @@ const Home = () => {
       <div className="right-container" style={isLeftDashboard ? null : { width: "100%" }}>
         <div className="right-container-top">
           <div className="threedashIcon" onClick={handleResize} >{DashboardIcons.threeDashIcon}</div>
-          <h1>&lt; {tabName??"Welcome!"} /&gt;</h1>
+          <h1>&lt; {tabName ?? "Welcome!"} /&gt;</h1>
           {
             isUser ?
               (
