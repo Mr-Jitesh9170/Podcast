@@ -10,3 +10,12 @@ export const userProfileView = async (userId, setProfile) => {
         console.log(error, "<-- error in user profile view!")
     }
 }
+
+export const profileUpload = async (formdata) => {
+    try {
+        let response = await connect.post("/podcast/profile-update", formdata);
+        return response.data;
+    } catch (error) {
+        console.log(error, "<-- error in profileUpload!")
+    }
+}

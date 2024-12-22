@@ -65,9 +65,7 @@ const Upload = () => {
         setPreview({ ...preview, imgPreview: imgUrl })
       }
     } else {
-      console.log(value)
-
-      setUploadPod({ ...uploadPod, [name]: value })
+       setUploadPod({ ...uploadPod, [name]: value })
     }
   }
   const handleNext = () => {

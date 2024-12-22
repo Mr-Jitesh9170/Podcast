@@ -34,7 +34,8 @@ const Favourites = ({ Name }) => {
       <div className="your-favourites-content">
         {
           favouritesLists?.map(({ podcastId, userId }) => {
-            return <Card isAdded={isAdded} podcast={{ ...podcastId, ...userId }} />
+            podcastId.userId = userId;
+            return <Card isAdded={isAdded} podcast={podcastId} />
           })
         }
       </div>

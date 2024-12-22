@@ -84,7 +84,7 @@ exports.yourUploadPodcastLists = async (req, res, next) => {
             [
                 {
                     path: "userId",
-                    select: "-password -token -email"
+                    select: "-password -token"
                 }
             ]
         )

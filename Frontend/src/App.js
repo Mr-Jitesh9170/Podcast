@@ -12,7 +12,7 @@ const Search = lazy(() => import("./page/search.jsx"))
 const Favourites = lazy(() => import("./page/favourites.jsx"))
 const Profile = lazy(() => import("./page/profile.jsx"))
 
-
+ 
 function App() {
   return (
     <Suspense fallback={

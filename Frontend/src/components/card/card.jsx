@@ -1,11 +1,12 @@
 import "./card.scss"
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
-import { RiAccountCircleFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
+import { Circuler } from "../circuler/circuler";
 
 export const Card = ({ podcast, handleCard, isAdded }) => {
   return (
     <>
-      <div className={`cardContainer ${podcast?.isMedia === "Audio" ? "audio" : "video"}`}>
+      <Link to={`/podcast/podcast-details/${podcast?.userId?._id}`} className={`cardContainer ${podcast?.isMedia === "Audio" ? "audio" : "video"}`}>
         <div className="img">
           <img src={podcast?.episodeImgPath ? `http://localhost:8080/${podcast?.episodeImgPath}` : "https://hbr.org/resources/images/article_assets/2019/03/Mar19_19_jason-rosewell-60014-unsplash_3.jpg"} alt="loading" />
         </div>
@@ -20,13 +21,13 @@ export const Card = ({ podcast, handleCard, isAdded }) => {
         <div className="card-thumbnail-icon">
           <div className="icon-thumbnail">
             <div className="img">
-              <RiAccountCircleFill size={20} />
+              <Circuler width={20} height={20} img={`http://localhost:8080/${podcast?.userId.profilePhoto}`} />
             </div>
-            <span>{podcast?.userId.name ?? "Unknown"}</span> 
+            <span>{podcast?.userId.name ?? "Unknown"}</span>
           </div>
           <span> • {podcast?.viewCount ?? 0} views</span>
         </div>
-      </div >
+      </Link >
     </>
   )
 } 

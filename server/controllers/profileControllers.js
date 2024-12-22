@@ -1,7 +1,5 @@
 const userModel = require("../models/register")
 
-
-// view profile =>
 exports.userProfileController = async (req, res, next) => {
     let { userId } = req.body;
     if (!userId) {
@@ -18,3 +16,18 @@ exports.userProfileController = async (req, res, next) => {
     }
 }
 
+exports.profileUploadControllers = async (req, res) => {
+    let { userId } = req.body
+    if (!userId) {
+        return res.json({ status: 400, message: "Userid missing!" })
+    }
+    if (!req.file) {
+        return res.json({ status: 400, message: "Profile photo missing!" })
+    }
+    try {
+        await userModel.findOneAndUpdate({ _id: userId }, { profilePhoto: req.file.filename })
+        res.json({ status: 200, message: "Profile photo updated!" })
+    } catch (error) {
+        next(error)
+    }
+}

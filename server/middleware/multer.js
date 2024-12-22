@@ -23,5 +23,8 @@ class Podcast {
 
 // for podcast =>
 const podcast = new Podcast('media');
+const profilePhoto = new Podcast("media")
 
 exports.podcastUploads = multer({ storage: podcast.multerStorage });
+exports.profileUploads = multer({ storage: profilePhoto.multerStorage });
+

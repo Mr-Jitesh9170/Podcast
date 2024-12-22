@@ -5,7 +5,7 @@ import { connect } from "../apis/auth.js";
 export const categoryLists = async (podcastCategory) => {
     try {
         let response = await connect.post("/podcast/category-podcast-lists", { podcastCategory });
-        return  response.data?.podcastCategoryLists
+        return response.data?.podcastCategoryLists
     } catch (error) {
         console.log(error, "<-- error in create podcast!")
     }
@@ -55,9 +55,7 @@ export const favouritePodLists = async (userId, setFavouritesLists) => {
 // add/remove favrourite podcasts =>
 export const addOrRemoveFavouritePod = async (favourite) => {
     try {
-        let results = await connect.post("/podcast/add-or-remove-favourite-podcasts", favourite);
-        console.log(favourite)
-        console.log(results.data)
+        await connect.post("/podcast/add-or-remove-favourite-podcasts", favourite);
     } catch (error) {
         console.log(error, "<-- error in addOrRemoveFavouritePod!")
     }
