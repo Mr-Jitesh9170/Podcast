@@ -1,19 +1,20 @@
 import "../styles/Upload.scss"
-import { DashboardIcons, podcastCategories } from "../data/data"
+import { podcastCategories } from "../data/data"
 import { IoMdCloudUpload } from "react-icons/io";
 import { useContext, useState } from "react";
-import { IsLogginedContext, isUserContext } from "../context/isLogined";
+import { isUserContext } from "../context/isLogined";
 import { ToastContainer, toast } from 'react-toastify';
 import { alert } from "../utils/alert";
 import 'react-toastify/dist/ReactToastify.css';
 import { createPodcast } from "../apis/upload";
 import { useNavigate } from "react-router-dom";
+import { RxCross2 } from "react-icons/rx";
+import { MdCloudUpload } from "react-icons/md";
 
 
-const Upload = () => {
+const Upload = ({ setOpen }) => {
   const { isUser } = useContext(isUserContext)
   const navigate = useNavigate()
-  const { setClosed } = useContext(IsLogginedContext);
   const [next, setNext] = useState(true);
   const [uploadPod, setUploadPod] = useState(
     {
@@ -51,7 +52,7 @@ const Upload = () => {
     if (resPod) {
       toast.success("Podcast uploaded!")
       navigate("/podcast/profile")
-      setClosed("")
+      setOpen((prev) => ({ ...prev, isUploadOpen: false }))
     } else {
       toast.warning("Something went wrong!")
     }
@@ -65,7 +66,7 @@ const Upload = () => {
         setPreview({ ...preview, imgPreview: imgUrl })
       }
     } else {
-       setUploadPod({ ...uploadPod, [name]: value })
+      setUploadPod({ ...uploadPod, [name]: value })
     }
   }
   const handleNext = () => {
@@ -75,14 +76,16 @@ const Upload = () => {
     setNext(true)
   }
   const handleClosed = () => {
-    setClosed("")
+    setOpen((prev) => ({ ...prev, isUploadOpen: false }))
   }
   return (
     <div className="uploadVideoAudio">
       <ToastContainer />
       <div className="upload-1">
         <h3>Upload Podcast</h3>
-        <span onClick={handleClosed}>{DashboardIcons.crossIcon}</span>
+        <span onClick={handleClosed}>
+          <RxCross2 size={27} />
+        </span>
       </div>
       {
         next ? (
@@ -97,7 +100,9 @@ const Upload = () => {
                 ) :
                   (
                     <>
-                      <span style={{ width: "40px" }}>{DashboardIcons.uploadIcon}</span>
+                      <span style={{ width: "40px" }}>
+                        <MdCloudUpload size={27} />
+                      </span>
                       <span>Click here to upload thumbnail</span>
                       <p>
                         <span>or</span>

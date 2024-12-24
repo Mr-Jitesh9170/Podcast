@@ -13,7 +13,7 @@ const Category = () => {
         setCategoryLists(categoryData);
     }
     useEffect(() => {
-        getCategoryData();
+        getCategoryData(); 
     }, [])
     return (
         <div className="categoryContainer">

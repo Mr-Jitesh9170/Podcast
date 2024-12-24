@@ -1,7 +1,8 @@
 import "../styles/search.scss"
-import { DashboardIcons, podcastCategories } from "../data/data";
+import { podcastCategories } from "../data/data";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { IoSearch } from "react-icons/io5";
 
 const Search = () => {
   const [search, setSearch] = useState('');
@@ -11,7 +12,9 @@ const Search = () => {
   return (
     <div className="search-container">
       <div className="search-Top">
-        <div className="search-top-icon" >{DashboardIcons.searchIcon}</div>
+        <div className="search-top-icon" >
+          <IoSearch size={27} />
+        </div>
         <input type="text" placeholder="Search Artist/Podcast" value={search} onChange={e => handleSearch(e)} />
       </div>
       <div className="search-bottom">
@@ -23,7 +26,7 @@ const Search = () => {
                   <div className="name">{name}</div>
                   <img src={img} alt="" />
                 </Link>
-              ) 
+              )
             }
           })
         }

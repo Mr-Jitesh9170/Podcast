@@ -9,7 +9,7 @@ export const IsLoginnedProvider = ({ children }) => {
             {children}
         </IsLogginedContext.Provider>
     )
-}
+} 
 
 // is user loggined =>
 export const isUserContext = createContext();

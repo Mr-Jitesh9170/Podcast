@@ -1,77 +1,20 @@
-import Upload from "../page/upload.jsx"
-import { LogIn } from "../page/auth.jsx"
-import { MdHome } from "react-icons/md";
-import { IoSearch } from "react-icons/io5";
-import { MdOutlineFavorite } from "react-icons/md";
-import { RiAccountPinCircleFill } from "react-icons/ri";
-import { IoReorderThreeSharp } from "react-icons/io5";
-import { MdCloudUpload } from "react-icons/md";
-import { RxCross2 } from "react-icons/rx";
-import { MdLogin } from "react-icons/md";
-
-
 
 // All left side dashboard icons =>
-const HomeIcon = <MdHome size={27} />
-const SearchIcon = <IoSearch size={27} />
-const FavruitIcon = <MdOutlineFavorite size={27} />
-const AccountIcon = <RiAccountPinCircleFill size={27} />
-const ThreeDashIcon = <IoReorderThreeSharp size={27} color="#fff" />
-const UploadIcon = <MdCloudUpload size={27} />
-const CrossButtonIcon = <RxCross2 size={27} />
-const LoginIcon = <MdLogin size={27} />
+// const HomeIcon = <MdHome size={27} />
+// const SearchIcon = <IoSearch size={27} />
+// const FavruitIcon = <MdOutlineFavorite size={27} />
+// const AccountIcon = <RiAccountPinCircleFill color="#2b6fc2" size={27} />
+// const ThreeDashIcon = <IoReorderThreeSharp size={27} color="#fff" />
+// const UploadIcon = <MdCloudUpload size={27} />
+// const CrossButtonIcon = <RxCross2 size={27} />
+// const LoginIcon = <MdLogin size={27} />
 
 
 
-
-
-export const DashboardIcons = {
-  homeIcon: HomeIcon,
-  searchIcon: SearchIcon,
-  favouritesIcon: FavruitIcon,
-  accountIcon: AccountIcon,
-  threeDashIcon: ThreeDashIcon,
-  crossIcon: CrossButtonIcon
-}
-
-
-// ==============================================================================================>
-//  =============================== DASHBOARD PAGE DATA ======================================>
-// =====================================================================================>
-
-export const leftDashBoard = [
-  {
-    name: "Dashboard",
-    img: HomeIcon,
-    route: "/"
-  },
-  {
-    name: "Search",
-    img: SearchIcon,
-    route: "/podcast/search"
-  },
-  {
-    name: "Favourites",
-    img: FavruitIcon,
-    route: "/podcast/favourites"
-  },
-  {
-    name: "Upload",
-    img: UploadIcon,
-    route: <Upload />
-  },
-  {
-    name: "Log in",
-    img: LoginIcon,
-    route: <LogIn />
-  },
-]
 
 // ==============================================================================================>
 //  =============================== SEARCH PAGE DATA ======================================>
 // =====================================================================================>
-
-
 
 export const podcastCategories = [
   {
@@ -136,8 +79,4 @@ export const podcastCategories = [
   },
 
 ]
-
-// ==============================================================================================>
-//  =============================== UPLOAD PAGE DATA ======================================>
-// =====================================================================================>
-
+ 

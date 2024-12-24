@@ -1,21 +1,17 @@
 import "../styles/auth.scss";
 import GoogleIcon from "../Assets/google.webp";
-import { DashboardIcons } from "../data/data";
-import { useState, useContext } from "react";
-import { IsLogginedContext, } from "../context/isLogined";
+import { useState } from "react";
 import { auth } from "../apis/auth";
 import { useNavigate } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { alert } from "../utils/alert";
 import { jwtDecode } from "jwt-decode";
+import { RxCross2 } from "react-icons/rx";
 
-
-export const LogIn = () => {
+export const Auth = ({ setOpen }) => {
   const navigation = useNavigate();
   const [isLogin, setLogin] = useState(true)
-  const { isClosed, setClosed } = useContext(IsLogginedContext);
-
   const [input, setInput] = useState(
     {
       name: "",
@@ -45,7 +41,7 @@ export const LogIn = () => {
       toast.success(data.message, alert)
       const decodeToken = jwtDecode(data.token)
       localStorage.setItem("userId", decodeToken.userId)
-      setClosed("")
+      setOpen((prev) => ({ ...prev, isAuthOpen: false }))
       navigation("/podcast/search")
     }
   }
@@ -58,14 +54,13 @@ export const LogIn = () => {
 
   // switch sing in/sign up =>
   const isLoggined = () => {
-    isLogin ? setLogin(false) : setLogin(true)
+    setLogin(!isLogin)
   }
+
   // close page =>
   const handleClosed = () => {
-    isClosed ? setClosed(false) : setClosed(true)
+    setOpen((prev) => ({ ...prev, isAuthOpen: false }))
   }
-
-
   return (
     <>
       {
@@ -74,7 +69,9 @@ export const LogIn = () => {
             <div className="logIn-container">
               <div className="log-top1">
                 <span>Sign In</span>
-                <span onClick={handleClosed} >{DashboardIcons.crossIcon}</span>
+                <span onClick={handleClosed} >
+                  <RxCross2 size={27} />
+                </span>
               </div>
               <a href="/signin/google" className="log-top2">
                 <img src={GoogleIcon} alt="" width={30} />
@@ -100,7 +97,9 @@ export const LogIn = () => {
             <div className="logIn-container">
               <div className="log-top1">
                 <span>Sign Up</span>
-                <span onClick={handleClosed} >{DashboardIcons.crossIcon}</span>
+                <span onClick={handleClosed} >
+                  <RxCross2 size={27} />
+                </span>
               </div>
               <a href="/signin/google" className="log-top2">
                 <img src={GoogleIcon} alt="" width={30} />

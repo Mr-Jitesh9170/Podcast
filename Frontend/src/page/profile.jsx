@@ -39,8 +39,8 @@ const Profile = () => {
                 <div className="profile-name">
                     <Circuler width={"100px"} height={"100px"} img={`http://localhost:8080/${profile.profileData?.profilePhoto}`} />
                     <span>
-                        <label for="inputUpload">
-                            <FaEdit />
+                        <label for="inputUpload" style={{ cursor: "pointer" }}>
+                            <FaEdit color="#A64D79" />
                         </label>
                         <input name="profilePhoto" id="inputUpload" type="file" style={{ display: "none" }} onChange={profileHandler} />
                     </span>
