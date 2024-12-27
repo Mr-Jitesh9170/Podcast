@@ -4,7 +4,8 @@
   border-radius: 15px;
   padding: 15px 25px;
   color: #1a1a1d;
-  height: 100%; 
+  height: 100%;
+
   h3 {
     color: #1a1a1d;
   }
@@ -23,7 +24,6 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-
     .upload-selection-box {
       display: flex;
       gap: 10px;
@@ -73,7 +73,6 @@
 }
 
 .file-upload {
-  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -81,7 +80,8 @@
   gap: 8px;
   border-radius: 10px;
   border: 1px dotted rgb(242, 241, 241);
-  height: 27%;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
 
   p {
@@ -90,6 +90,7 @@
     }
 
     label {
+      cursor: pointer;
       color: blue;
     }
   }
@@ -98,6 +99,11 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 }
 

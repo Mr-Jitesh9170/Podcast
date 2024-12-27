@@ -2,12 +2,13 @@ import { useParams } from "react-router-dom";
 import "./podcastDetails.scss"
 import { Circuler } from "../circuler/circuler";
 import Badges from "./../../Assets/badge.svg"
-import { useEffect, useState } from "react";
-import { yourPodcastLists } from "../../apis/upload";
+import { useContext, useEffect, useState } from "react";
+import { podcastViewCount, yourPodcastLists } from "../../apis/upload";
 import { userProfileView } from "../../apis/profile";
-import { Video } from "../video/video";
+import { MediaPlayerContext } from "../../context/context";
 
 const PodcastDetails = () => {
+    const { setMedia } = useContext(MediaPlayerContext)
     const { id } = useParams();
     const [profile, setProfile] = useState(
         {
@@ -15,66 +16,52 @@ const PodcastDetails = () => {
             podcastLists: []
         }
     );
-    const [episodePlayer, setEpisodePalyer] = useState({});
 
-    console.log(episodePlayer)
-
-    const handleEpisodePlayer = (episodePath, isMedia) => {
-        setEpisodePalyer({ episodePath, isMedia })
-    }
-
-    const HandleEpisodeClose = () => {
-        setEpisodePalyer({})
+    const handleEpisodePlayer = async (podcastId, episodeName, episodeDescription, thumbnail, episodePath, isMedia) => {
+        await podcastViewCount({ podcastId, userId: localStorage.getItem("userId") })
+        setMedia({ episodeName, episodeDescription, thumbnail, episodePath, isMedia })
     }
 
     useEffect(() => {
-        userProfileView(id, setProfile)
-        yourPodcastLists(id, setProfile)
+        userProfileView(id, setProfile);
+        yourPodcastLists(id, setProfile);
     }, [])
-
 
     return (
         <div className="podcastUserDetails">
             <div className="podcaster">
-                <Circuler width={"80px"} height={"80px"} img={`http://localhost:8080/${profile.profileData.profilePhoto}`} />
+                <Circuler width={"80px"} height={"80px"} img={profile.profileData?.profilePhoto} />
                 <div className="userDetails">
                     <div className="name">
-                        <h2>{profile.profileData.name}</h2>
+                        <h2>{profile.profileData?.name}</h2>
                         <img src={Badges} alt="" width={20} />
                     </div>
-                    <p>{profile.profileData.email}</p>
+                    <p>{profile.profileData?.email}</p>
                 </div>
             </div>
             <hr />
             <div className="allEpisods">
                 {
-                    profile.podcastLists?.map(({ episodeName, episodeDescription, episodeImgPath, episodeVideoPath, isMedia, userId }) => {
+                    profile.podcastLists?.map(({ _id, episodeName, viewCount, episodeDescription, episodeImgPath, episodeVideoPath, isMedia, userId }) => {
                         return (
-                            <div className="episode" onClick={() => handleEpisodePlayer(episodeVideoPath, isMedia)}>
+                            <div className={`episode ${isMedia === "Audio" ? "audio" : "video"}`} onClick={() => handleEpisodePlayer(_id, episodeName, episodeDescription, episodeImgPath, episodeVideoPath, isMedia)}>
                                 <div className="episodeThumbnail">
                                     <img src={episodeImgPath ? `http://localhost:8080/${episodeImgPath}` : "https://hbr.org/resources/images/article_assets/2019/03/Mar19_19_jason-rosewell-60014-unsplash_3.jpg"} alt="" />
                                 </div>
                                 <div className="episodeDetails">
-                                    <h2 className="episodeName">{episodeName}</h2>
-                                    <b className="episodeAbout">{episodeDescription}fdfdf fdfd fdfdf fdf fdf fdf </b>
+                                    <h3 className="episodeName">{episodeName}</h3>
+                                    <p className="episodeAbout">{episodeDescription}</p>
                                     <div className="channelDetails">
                                         <div className="logo">
-                                            <Circuler width={20} height={20} img={`http://localhost:8080/${userId.profilePhoto}`} />
+                                            <Circuler width={20} height={20} img={userId?.profilePhoto} />
                                             <span>{userId?.name}</span>
                                         </div>
-                                        <div className="views">0 • views</div>
+                                        <div className="views">{viewCount} • views</div>
                                     </div>
                                 </div>
                             </div>
                         )
                     })
-                }
-            </div>
-            <div className="watchEpisodes">
-                {
-                    episodePlayer?.isMedia && (
-                        <Video episodePlayer={episodePlayer} HandleEpisodeClose={HandleEpisodeClose} />
-                    )
                 }
             </div>
         </div>

@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 import "../styles/home.scss";
 import Logo from "../Assets/Logo.png"
-import { isUserContext } from "../context/isLogined";
+import { isUserContext } from "../context/context";
 import { Circuler } from "../components/circuler/circuler";
 import Upload from "../page/upload"
 import { MdHome } from "react-icons/md";
@@ -21,7 +21,7 @@ const Home = () => {
   const { isUser } = useContext(isUserContext);
   const [isOpen, setOpen] = useState(
     {
-      isUploadOpen: false,
+      isUploadOpen: false, 
       isAuthOpen: false,
     }
   )
@@ -64,7 +64,7 @@ const Home = () => {
               </div>
               <div className="left-name" >Favourites</div>
             </Link>
-            <hr />
+            <hr /> 
             <div className="bottom-data" onClick={handleUploadShow} >
               <div className="img" >
                 <MdCloudUpload size={27} />

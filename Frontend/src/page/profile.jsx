@@ -37,12 +37,12 @@ const Profile = () => {
         <div className="your-profile-container">
             <div className="your-profile-top1">
                 <div className="profile-name">
-                    <Circuler width={"100px"} height={"100px"} img={`http://localhost:8080/${profile.profileData?.profilePhoto}`} />
+                    <Circuler width={"100px"} height={"100px"} img={profile.profileData?.profilePhoto} />
                     <span>
-                        <label for="inputUpload" style={{ cursor: "pointer" }}>
+                        <label for="profile" style={{ cursor: "pointer" }}>
                             <FaEdit color="#A64D79" />
                         </label>
-                        <input name="profilePhoto" id="inputUpload" type="file" style={{ display: "none" }} onChange={profileHandler} />
+                        <input name="" id="profile" type="file" style={{ display: "none" }} onChange={profileHandler} />
                     </span>
                 </div>
                 <div className="email-and-name">

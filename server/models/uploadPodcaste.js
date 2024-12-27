@@ -11,14 +11,6 @@ const uploadPodcastSchema = new Schema(
             type: String,
             required: true
         },
-        podcastName: {
-            type: String,
-            required: true
-        },
-        podcastDescription: {
-            type: String,
-            required: true
-        },
         isMedia: {
             type: String,
             required: true,

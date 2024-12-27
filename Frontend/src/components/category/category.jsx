@@ -13,19 +13,17 @@ const Category = () => {
         setCategoryLists(categoryData);
     }
     useEffect(() => {
-        getCategoryData(); 
+        getCategoryData();
     }, [])
     return (
         <div className="categoryContainer">
-            <div className="categorylists">
-                <h2>{category}</h2>
-                <div className="card" >
-                    {
-                        categorylists?.map((categrylist) => {
-                            return <Card podcast={categrylist} />
-                        })
-                    }
-                </div>
+            <h2>{category}</h2>
+            <div className="card" >
+                {
+                    categorylists?.map((categrylist) => {
+                        return <Card podcast={categrylist} />
+                    })
+                }
             </div>
         </div>
     )

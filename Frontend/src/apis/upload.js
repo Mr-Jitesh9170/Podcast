@@ -46,7 +46,7 @@ export const favouritePodLists = async (userId, setFavouritesLists) => {
     }
     try {
         let response = await connect.post("/podcast/favourite-podcast-lists", { userId });
-        return setFavouritesLists(response.data.favritePodLists);
+        return setFavouritesLists(response.data?.favritePodLists);
     } catch (error) {
         console.log(error, "<-- error in favouritePodLists lists!")
     }
@@ -58,5 +58,15 @@ export const addOrRemoveFavouritePod = async (favourite) => {
         await connect.post("/podcast/add-or-remove-favourite-podcasts", favourite);
     } catch (error) {
         console.log(error, "<-- error in addOrRemoveFavouritePod!")
+    }
+}
+
+
+// poadcast view count =>
+export const podcastViewCount = async (data) => {
+    try {
+        await connect.post("/podcast/view-count", data);
+    } catch (error) {
+        console.log(error, "<-- error in podcastViewCount!")
     }
 }

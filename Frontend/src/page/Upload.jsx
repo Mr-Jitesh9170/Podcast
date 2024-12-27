@@ -2,7 +2,7 @@ import "../styles/Upload.scss"
 import { podcastCategories } from "../data/data"
 import { IoMdCloudUpload } from "react-icons/io";
 import { useContext, useState } from "react";
-import { isUserContext } from "../context/isLogined";
+import { isUserContext } from "../context/context";
 import { ToastContainer, toast } from 'react-toastify';
 import { alert } from "../utils/alert";
 import 'react-toastify/dist/ReactToastify.css';
@@ -20,8 +20,6 @@ const Upload = ({ setOpen }) => {
     {
       userId: isUser,
       episodeImgPath: "",
-      podcastName: "",
-      podcastDescription: "",
       isMedia: "Audio",
       podcastCategory: "Culture",
       episodeName: "",
@@ -31,7 +29,8 @@ const Upload = ({ setOpen }) => {
   )
   const [preview, setPreview] = useState(
     {
-      imgPreview: ""
+      imgPreview: "",
+      videoPreview: ""
     }
   )
   const handleUpload = async () => {
@@ -51,7 +50,7 @@ const Upload = ({ setOpen }) => {
     let resPod = await createPodcast(uploadPodData);
     if (resPod) {
       toast.success("Podcast uploaded!")
-      navigate("/podcast/profile")
+      navigate("/")
       setOpen((prev) => ({ ...prev, isUploadOpen: false }))
     } else {
       toast.warning("Something went wrong!")
@@ -64,6 +63,9 @@ const Upload = ({ setOpen }) => {
       if (name === "episodeImgPath") {
         const imgUrl = URL.createObjectURL(files[0]);
         setPreview({ ...preview, imgPreview: imgUrl })
+      } else if (name === "episodeVideoPath") {
+        const videoUrl = URL.createObjectURL(files[0]);
+        setPreview({ ...preview, videoPreview: videoUrl })
       }
     } else {
       setUploadPod({ ...uploadPod, [name]: value })
@@ -94,9 +96,7 @@ const Upload = ({ setOpen }) => {
             <div className="file-upload">
               {
                 uploadPod.episodeImgPath ? (
-                  <>
-                    <img src={preview.imgPreview} alt="" />
-                  </>
+                  <img src={preview.imgPreview} alt="" />
                 ) :
                   (
                     <>
@@ -113,8 +113,6 @@ const Upload = ({ setOpen }) => {
                   )
               }
             </div>
-            <input name="podcastName" type="text" placeholder="Podcast-name*" value={uploadPod.podcastName} onChange={uploadHandleChange} />
-            <textarea name="podcastDescription" placeholder="Podcast-descriptions* " value={uploadPod.podcastDescription} onChange={uploadHandleChange} id="" cols="20" rows="10" />
             <div className="upload-selection-box">
               <select name="isMedia" className="selection-box" value={uploadPod.isMedia} onChange={uploadHandleChange}  >
                 <option value="Audio"  >Audio</option>
@@ -135,11 +133,23 @@ const Upload = ({ setOpen }) => {
             <div className="podVideoContainer">
               <p>Episode details:</p>
               <div className="file-upload">
-                <IoMdCloudUpload width={40} height={40} />
-                <p>
-                  <label for="inputUpload">Select audio/video</label>
-                  <input name="episodeVideoPath" id="inputUpload" type="file" style={{ display: "none" }} onChange={uploadHandleChange} />
-                </p>
+                {
+                  uploadPod.episodeVideoPath ?
+                    (
+                      <video controls autoPlay>
+                        <source src={preview.videoPreview} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    ) : (
+                      <>
+                        <IoMdCloudUpload width={40} height={40} />
+                        <p>
+                          <label for="uploadVideo">Select audio/video</label>
+                          <input name="episodeVideoPath" id="uploadVideo" type="file" style={{ display: "none" }} onChange={uploadHandleChange} />
+                        </p>
+                      </>
+                    )
+                }
               </div>
               <input name="episodeName" type="text" placeholder="Episode-name*" value={uploadPod.episodeName} onChange={uploadHandleChange} />
               <textarea name="episodeDescription" placeholder="Episode-descriptions* " id="" cols="20" rows="10" value={uploadPod.episodeDescription} onChange={uploadHandleChange} />

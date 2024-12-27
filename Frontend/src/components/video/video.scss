@@ -10,7 +10,9 @@
   display: flex;
   justify-content: center;
   padding: 50px 0;
-   .videos {
+  z-index: 2;
+
+  .videos {
     width: 50%;
     z-index: 1;
     display: flex;
@@ -28,6 +30,7 @@
       padding: 40px 0;
       width: 100%;
       height: 80%;
+
       .responsiveVideo {
         width: 100%;
         height: 100%;

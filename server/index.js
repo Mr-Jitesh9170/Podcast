@@ -4,8 +4,6 @@ const cors = require("cors")
 const { mongoConnect } = require("./config/db.js")
 const { verifyToken } = require("./middleware/jwtAuth.js")
 const app = express();
-const path = require('path');
-
 
 
 // middleware =>
@@ -21,12 +19,12 @@ mongoConnect();
 
 // routes => 
 app.use(require("./routes/podcasteRoutes.js"));
-app.use(require("./routes/profileRoutes.js")) 
+app.use(require("./routes/profileRoutes.js"))
 app.use(verifyToken);
 
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ success: false, message: err.message || 'Internal Server Error' });
+  console.error(err);
+  res.status(500).json({ success: false, message: 'Internal Server Error' });
 });
 
 app.listen(process.env.PORT, () => {

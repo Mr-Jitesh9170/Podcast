@@ -14,7 +14,7 @@ exports.categoryWisePodlists = async (req, res) => {
                 {
                     path: "userId",
                     select: "-password -token -email"
-                } 
+                }
             ]
         )
         if (!podcastCategoryLists.length) {
@@ -89,7 +89,7 @@ exports.yourUploadPodcastLists = async (req, res, next) => {
             ]
         )
         if (!podcastLists.length) {
-            return res.json({ status: 200, message: "You have not uploaded a podcast!" })
+            return res.json({ status: 404, message: "You have not uploaded a podcast!" })
         }
         res.json({ status: 200, message: "Your podcast lists!", podcastLists })
     } catch (error) {
@@ -102,17 +102,36 @@ exports.yourUploadPodcastLists = async (req, res, next) => {
 exports.createPodcasteControllers = async (req, res, next) => {
     for (const key in req.body) {
         if (!req.body[key]) {
-            return res.json({ status: 200, message: `${key} missing!` })
+            return res.json({ status: 400, message: `${key} missing!` })
         }
     }
     try {
         if (!req.files.length) {
-            return res.json({ status: 200, message: "Podcast files missing!" })
+            return res.json({ status: 400, message: "Podcast files missing!" })
         }
         let podcastImage = req.files[0].filename;
         let episodeFileName = req.files[1].filename;
         await podcastUpload.create({ ...req.body, episodeImgPath: podcastImage, episodeVideoPath: episodeFileName })
         return res.json({ status: 200, message: "Podcast created!" })
+    } catch (error) {
+        next(error)
+    }
+}
+
+// podcast watch view count =>
+exports.podcastViewCount = async (req, res, next) => {
+    let { podcastId, userId } = req.body;
+    if (!podcastId) {
+        return res.json({ status: 400, message: "Podcast id missing!" })
+    }
+    try {
+        let podData = await podcastUpload.findOne({ _id: podcastId, userId: { $ne: userId } });
+        if (!podData) {
+            return res.json({ status: 404, message: "Not found!" })
+        }
+        podData.viewCount = podData.viewCount + 1;
+        podData.save();
+        return res.json({ status: 200, message: "Episode view count inscreased!" })
     } catch (error) {
         next(error)
     }
