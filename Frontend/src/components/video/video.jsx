@@ -3,20 +3,22 @@ import "./video.scss"
 import ben10 from "./ben-10.3gp"
 
 
-export const Video = () => {
-    const { video } = useParams();
+export const Video = ({ episodePlayer, HandleEpisodeClose }) => {
     return (
         <div className="videoContainer">
             <div className="videos">
                 <div className="videoDisplay">
-                    <video className="responsiveVideo" controls>
-                        <source src={ben10} type="video/mp4" />
+                    <video className="responsiveVideo" controls autoPlay>
+                        <source src={episodePlayer?.episodePath ? `http://localhost:8080/${episodePlayer?.episodePath}` : ben10} type="video/mp4" />
+                        Your browser does not support the video tag.
                     </video>
                 </div>
-                <div className="episodeDescriptions"  >
+                <div className="close" onClick={HandleEpisodeClose}>
                     ✖️
                 </div>
             </div>
-        </div> 
+        </div>
     )
 }
+
+// imgAndVideo-podcast-3489047.MP4

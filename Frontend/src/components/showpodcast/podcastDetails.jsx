@@ -5,6 +5,7 @@ import Badges from "./../../Assets/badge.svg"
 import { useEffect, useState } from "react";
 import { yourPodcastLists } from "../../apis/upload";
 import { userProfileView } from "../../apis/profile";
+import { Video } from "../video/video";
 
 const PodcastDetails = () => {
     const { id } = useParams();
@@ -14,10 +15,23 @@ const PodcastDetails = () => {
             podcastLists: []
         }
     );
+    const [episodePlayer, setEpisodePalyer] = useState({});
+
+    console.log(episodePlayer)
+
+    const handleEpisodePlayer = (episodePath, isMedia) => {
+        setEpisodePalyer({ episodePath, isMedia })
+    }
+
+    const HandleEpisodeClose = () => {
+        setEpisodePalyer({})
+    }
+
     useEffect(() => {
         userProfileView(id, setProfile)
         yourPodcastLists(id, setProfile)
     }, [])
+
 
     return (
         <div className="podcastUserDetails">
@@ -36,7 +50,7 @@ const PodcastDetails = () => {
                 {
                     profile.podcastLists?.map(({ episodeName, episodeDescription, episodeImgPath, episodeVideoPath, isMedia, userId }) => {
                         return (
-                            <div className="episode">
+                            <div className="episode" onClick={() => handleEpisodePlayer(episodeVideoPath, isMedia)}>
                                 <div className="episodeThumbnail">
                                     <img src={episodeImgPath ? `http://localhost:8080/${episodeImgPath}` : "https://hbr.org/resources/images/article_assets/2019/03/Mar19_19_jason-rosewell-60014-unsplash_3.jpg"} alt="" />
                                 </div>
@@ -54,6 +68,13 @@ const PodcastDetails = () => {
                             </div>
                         )
                     })
+                }
+            </div>
+            <div className="watchEpisodes">
+                {
+                    episodePlayer?.isMedia && (
+                        <Video episodePlayer={episodePlayer} HandleEpisodeClose={HandleEpisodeClose} />
+                    )
                 }
             </div>
         </div>

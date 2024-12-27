@@ -12,6 +12,7 @@ const DashBoard = () => {
       isHide: false
     }
   )
+  
   const getAllCategoriesData = async () => {
     try {
       await Promise.all(podcastCategories.map(async ({ name }) => {

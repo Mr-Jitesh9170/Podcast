@@ -7,4 +7,4 @@ export const alert = {
     draggable: true,
     progress: undefined,
     theme: "light",
-}
+} 

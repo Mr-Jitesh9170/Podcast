@@ -11,8 +11,10 @@ import { MdOutlineFavorite } from "react-icons/md";
 import { RiAccountPinCircleFill } from "react-icons/ri";
 import { IoReorderThreeSharp } from "react-icons/io5";
 import { MdCloudUpload } from "react-icons/md";
-import { MdLogin } from "react-icons/md";
+import { IoIosLogIn } from "react-icons/io";
 import { Auth } from "./auth";
+import { IoIosLogOut } from "react-icons/io";
+
 
 const Home = () => {
   const [isLeftDashboard, setLeftDashboard] = useState(true);
@@ -71,15 +73,27 @@ const Home = () => {
                 Uploads
               </div>
             </div>
-            <div className="bottom-data" onClick={handleAuthShow}>
-              <div className="img" >
-                <MdLogin size={27} />
-              </div>
-              <div className="left-name" >
-                Login
-              </div>
-            </div>
-          </div>
+            {
+              isUser ? (
+                <div className="bottom-data" onClick={handleAuthShow}>
+                  <div className="img" >
+                    <IoIosLogOut size={27} />
+                  </div>
+                  <div className="left-name" >
+                    Logout
+                  </div>
+                </div>) : (
+                <div className="bottom-data" onClick={handleAuthShow}>
+                  <div className="img" >
+                    <IoIosLogIn size={27} />
+                  </div>
+                  <div className="left-name" >
+                    Login
+                  </div>
+                </div>
+              )
+            }
+          </div >
         )
       }
       <div className="right-container" style={isLeftDashboard ? null : { width: "100%" }}>
