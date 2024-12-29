@@ -1,19 +1,15 @@
 import { createContext, useState } from "react";
 
-
 // is user loggined =>
 export const UserContext = createContext();
 export const UserProvider = ({ children }) => {
     const [isUser, setUser] = useState(localStorage.getItem("userId"))
-
-
     return (
         <UserContext.Provider value={{ isUser, setUser }}>
             {children}
         </UserContext.Provider>
     )
 }
-
 
 // open =>
 export const OpenContext = createContext();

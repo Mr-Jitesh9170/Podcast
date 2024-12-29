@@ -5,7 +5,6 @@
   color: #ffffffd2;
 
   .podcaster {
-    border-radius: 7px;
     width: 100%;
     height: 20%;
     display: flex;
@@ -13,6 +12,8 @@
     gap: 20px;
     padding: 25px 30px;
     background-color: #1a1a1d;
+    border-radius: 7px 7px 0 0;
+
     .userDetails {
       .name {
         h2 {
@@ -27,13 +28,13 @@
   }
 
   .allEpisods {
-    border-bottom-right-radius: 7px;
-    border-bottom-left-radius: 7px;
+    border-radius: 0 0 7px 7px;
     width: 100%;
     height: 80%;
     overflow-y: scroll;
     background-color: #1a1a1d;
     padding: 20px 25px;
+
     .episode {
       cursor: pointer;
       margin-bottom: 10px;
@@ -41,7 +42,9 @@
       border-radius: 10px;
       display: flex;
       gap: 20px;
-      background-color: #6a1e55;
+      background-color: #1a1a1d;
+      border: 1px dotted #a64d79;
+
       .episodeThumbnail {
         height: 100px;
         width: 200px;
@@ -71,6 +74,7 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
+          color: #a64d79;
         }
       }
       transition: all 0.3s;

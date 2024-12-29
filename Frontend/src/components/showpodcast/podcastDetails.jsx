@@ -14,7 +14,7 @@ const PodcastDetails = () => {
         {
             profileData: {},
             podcastLists: []
-        }
+        } 
     );
 
     const handleEpisodePlayer = async (podcastId, episodeName, episodeDescription, thumbnail, episodePath, isMedia) => {
@@ -39,8 +39,8 @@ const PodcastDetails = () => {
                     <p>{profile.profileData?.email}</p>
                 </div>
             </div>
-            <hr />
-            <div className="allEpisods">
+             <div className="allEpisods">
+                <h3 style={{ marginBottom: "10px" }}>All Episodes</h3>
                 {
                     profile.podcastLists?.map(({ _id, episodeName, viewCount, episodeDescription, episodeImgPath, episodeVideoPath, isMedia, userId }) => {
                         return (

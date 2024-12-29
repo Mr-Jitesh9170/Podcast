@@ -10,13 +10,13 @@ import "./navbar.scss"
 
 export const Navbar = () => {
     const { openAuthTab, openUploadTab } = useContext(OpenContext)
-    const { isUser } = useContext(UserContext);
-
+    const { isUser, setUser } = useContext(UserContext);
     const navigation = useNavigate()
-
+    
     const logoutHandler = async () => {
         await logout();
-        localStorage.removeItem("userId")
+        localStorage.removeItem("userId");
+        setUser("");
         navigation("/")
     }
     return (

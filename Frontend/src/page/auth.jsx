@@ -7,10 +7,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { alert } from "../utils/alert";
 import { RxCross2 } from "react-icons/rx";
-import { OpenContext } from "../context/context";
-
+import { OpenContext, UserContext } from "../context/context";
+import { Button } from "./../components/button/button"
 const Auth = () => {
   const navigation = useNavigate();
+  const { setUser } = useContext(UserContext);
   const { closeAuthTab } = useContext(OpenContext)
   const [isLogin, setLogin] = useState(true)
   const [input, setInput] = useState(
@@ -41,8 +42,9 @@ const Auth = () => {
       let data = await auth("/podcast/user/sign-in", { email: input.email, password: input.password });
       toast.success(data.message, alert)
       localStorage.setItem("userId", data?.userId)
+      setUser(data?.userId)
       closeAuthTab();
-      navigation("/")
+      navigation("/home")
     }
   }
 
@@ -58,8 +60,9 @@ const Auth = () => {
   }
 
 
+
   return (
-    <>
+    <div className="authConainer">
       {
         isLogin ?
           (
@@ -84,7 +87,7 @@ const Auth = () => {
                 <input type="password" placeholder="enter password" name="password" value={input.password} onChange={handleInput} />
                 <a href="##">forgot password ?</a>
               </div>
-              <button name="sign-in" onClick={handleSubmit}>Sign In</button>
+              <Button name={"Sign In"} btnName={"sign-in"} btnClick={handleSubmit} />
               <div className="log-top5">
                 <span>Don't have an account ?</span>
                 <span href="" onClick={isLoggined}>Create Account</span>
@@ -112,7 +115,7 @@ const Auth = () => {
                 <input type="email" placeholder="Email" name="email" value={input.email} onChange={handleInput} />
                 <input type="password" placeholder="Password" name="password" value={input.password} onChange={handleInput} />
               </div>
-              <button onClick={handleSubmit} name="sign-up">Sign up</button>
+              <Button name={"Sign up"} btnName={"sign-up"} btnClick={handleSubmit} />
               <div className="log-top5">
                 <span>Already have an account ?</span>
                 <span onClick={isLoggined}>Sign in</span>
@@ -121,7 +124,7 @@ const Auth = () => {
           )
       }
       <ToastContainer />
-    </>
+    </div>
   )
 }
 

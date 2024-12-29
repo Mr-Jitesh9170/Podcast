@@ -19,7 +19,7 @@ import Auth from "./page/auth.jsx";
 function App() {
   const { media } = useContext(MediaPlayerContext);
   const { open } = useContext(OpenContext);
-  
+
 
   return (
     <div className="app">
@@ -28,15 +28,14 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />}  >
-            <Route index element={<DashBoard />} />
-            <Route path="/podcast/search" element={<Search />} />
+            <Route path="home" element={<DashBoard />} />
+            <Route index element={<Search />} />
             <Route path="/podcast/favourites" element={<Favourites />} />
             <Route path="/podcast/profile" element={<Profile />} />
             <Route path="/podcast/search/:category" element={<Category />} />
             <Route path="/podcast/podcast-details/:id" element={<PodcastDetails />} />
           </Route>
           <Route path="*" element={<ErrorPage />} />
-
         </Routes>
         {open.isAuthOpen && < Auth />}
         {open.isUploadOpen && <Upload />}

@@ -1,7 +1,7 @@
 .cardContainer {
   text-decoration: none;
   background-color: #1a1a1d;
-  border: 0.2px solid #a64d79;
+  border: 1px dotted #a64d79;
   padding: 13px 14px;
   width: 250px;
   height: 300px;
@@ -12,7 +12,7 @@
   gap: 7px;
   position: relative;
   cursor: pointer;
-  
+
   .img {
     border-radius: 5px;
     height: 50%;

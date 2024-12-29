@@ -1,11 +1,14 @@
 import "../styles/search.scss"
 import { podcastCategories } from "../data/data";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
+import { OpenContext, UserContext } from "../context/context";
 
 const Search = () => {
   const [search, setSearch] = useState('');
+  const { isUser } = useContext(UserContext)
+  const { openAuthTab } = useContext(OpenContext)
   const handleSearch = (e) => {
     setSearch(e.target.value)
   }
@@ -19,13 +22,20 @@ const Search = () => {
       </div>
       <div className="search-bottom">
         {
-          podcastCategories.map(({ name, color, img }) => {
-            if (name.toLocaleLowerCase().includes(search.trim().toLocaleLowerCase())) {
+          podcastCategories.filter(({ name }) => name.toLocaleLowerCase().includes(search.trim().toLocaleLowerCase())).map(({ name, color, img }) => {
+            if (isUser) {
               return (
                 <Link className="search-boxes" style={{ backgroundColor: `${color}` }} to={`/podcast/search/${name.toLowerCase()}`}  >
                   <div className="name">{name}</div>
                   <img src={img} alt="" />
                 </Link>
+              )
+            } else {
+              return (
+                <div className="search-boxes" style={{ backgroundColor: `${color}` }} to={`/podcast/search/${name.toLowerCase()}`} onClick={openAuthTab}>
+                  <div className="name">{name}</div>
+                  <img src={img} alt="" />
+                </div>
               )
             }
           })

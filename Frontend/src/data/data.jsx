@@ -75,12 +75,12 @@ export const podcastCategories = [
 export const navbar = [
   {
     name: "Home",
-    routes: "/",
+    routes: "/home",
     img: <MdHome size={27} />
   },
   {
     name: "Search",
-    routes: "/podcast/search",
+    routes: "/",
     img: <IoSearch size={27} />
   },
   {
