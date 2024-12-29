@@ -2,18 +2,19 @@ import "../styles/Upload.scss"
 import { podcastCategories } from "../data/data"
 import { IoMdCloudUpload } from "react-icons/io";
 import { useContext, useState } from "react";
-import { isUserContext } from "../context/context";
+import { OpenContext, UserContext } from "../context/context";
 import { ToastContainer, toast } from 'react-toastify';
 import { alert } from "../utils/alert";
 import 'react-toastify/dist/ReactToastify.css';
 import { createPodcast } from "../apis/upload";
 import { useNavigate } from "react-router-dom";
 import { RxCross2 } from "react-icons/rx";
-import { MdCloudUpload } from "react-icons/md";
+import { MdCloudUpload } from "react-icons/md"; 
 
 
-const Upload = ({ setOpen }) => {
-  const { isUser } = useContext(isUserContext)
+const Upload = () => {
+  const { closeUploadTab } = useContext(OpenContext)
+  const { isUser } = useContext(UserContext)
   const navigate = useNavigate()
   const [next, setNext] = useState(true);
   const [uploadPod, setUploadPod] = useState(
@@ -51,7 +52,7 @@ const Upload = ({ setOpen }) => {
     if (resPod) {
       toast.success("Podcast uploaded!")
       navigate("/")
-      setOpen((prev) => ({ ...prev, isUploadOpen: false }))
+      closeUploadTab();
     } else {
       toast.warning("Something went wrong!")
     }
@@ -77,15 +78,13 @@ const Upload = ({ setOpen }) => {
   const handlePrev = () => {
     setNext(true)
   }
-  const handleClosed = () => {
-    setOpen((prev) => ({ ...prev, isUploadOpen: false }))
-  }
+
   return (
     <div className="uploadVideoAudio">
       <ToastContainer />
       <div className="upload-1">
         <h3>Upload Podcast</h3>
-        <span onClick={handleClosed}>
+        <span onClick={closeUploadTab}>
           <RxCross2 size={27} />
         </span>
       </div>

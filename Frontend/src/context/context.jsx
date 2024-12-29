@@ -1,24 +1,45 @@
 import { createContext, useState } from "react";
 
-// closing the tabs =>
-export const IsLogginedContext = createContext();
-export const IsLoginnedProvider = ({ children }) => {
-    const [isClosed, setClosed] = useState("")
+
+// is user loggined =>
+export const UserContext = createContext();
+export const UserProvider = ({ children }) => {
+    const [isUser, setUser] = useState(localStorage.getItem("userId"))
+
+
     return (
-        <IsLogginedContext.Provider value={{ isClosed, setClosed }}>
+        <UserContext.Provider value={{ isUser, setUser }}>
             {children}
-        </IsLogginedContext.Provider>
+        </UserContext.Provider>
     )
 }
 
-// is user loggined =>
-export const isUserContext = createContext();
-export const IsUserProvider = ({ children }) => {
-    const [isUser, setUser] = useState(localStorage.getItem("userId"))
+
+// open =>
+export const OpenContext = createContext();
+export const OpenProvider = ({ children }) => {
+    const [open, setOpen] = useState({
+        isAuthOpen: false,
+        isUploadOpen: false
+    })
+
+    const openAuthTab = () => {
+        setOpen({ isAuthOpen: true })
+    }
+    const openUploadTab = () => {
+        setOpen({ isUploadOpen: true })
+    }
+
+    const closeAuthTab = () => {
+        setOpen((prev) => ({ ...open, isAuthOpen: false }))
+    }
+    const closeUploadTab = () => {
+        setOpen((prev) => ({ ...open, isUploadOpen: false }))
+    }
     return (
-        <isUserContext.Provider value={{ isUser, setUser }}>
+        <OpenContext.Provider value={{ open, setOpen, closeUploadTab, openUploadTab, closeAuthTab, openAuthTab }} >
             {children}
-        </isUserContext.Provider>
+        </OpenContext.Provider >
     )
 }
 

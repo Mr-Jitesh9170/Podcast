@@ -3,43 +3,65 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 
 
-exports.signUpControllers = async (req, res) => {
+exports.signUpControllers = async (req, res, next) => {
     let { name, email, password } = req.body;
     try {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         let isEmail = emailPattern.test(email);
         if (!isEmail) {
-            return res.json({ status: 200, message: "Email is not valid!" });
+            return res.json({ status: 400, message: "Email is not valid!" });
         }
         let user = await userModel.findOne({ email });
         if (user) {
-            return res.json({ status: 200, message: "User already exists!" });
+            return res.json({ status: 400, message: "User already exists!" });
         }
         const saltRounds = 10;
         password = await bcrypt.hash(password, saltRounds);
         await userModel.create({ name, email, password });
         res.json({ status: 201, message: "User sign up successfully!" })
     } catch (error) {
-        console.log(error, "<--- error in signup controllers!")
-        res.json({ status: 500, message: "Internal server error!" })
+        next(error);
     }
 }
 
-exports.signInControllers = async (req, res) => {
+const generateToken = (userData) => {
+    let token = jwt.sign(userData, process.env.SECRET_KEY, { expiresIn: '7d' })
+    return token;
+}
+
+exports.signInControllers = async (req, res, next) => {
     let { email, password } = req.body;
     try {
         let user = await userModel.findOne({ email })
         if (!user) {
-            return res.json({ status: 200, message: "Register first!" })
+            return res.status(404).json({ message: "User does not exists!" })
         }
-        let isPassword = bcrypt.compare(password, user.password);
+        let isPassword = await bcrypt.compare(password, user.password);
         if (!isPassword) {
-            return res.json({ status: 200, message: "User password is wrong!" })
+            return res.status(400).json({ message: "User password is wrong!" })
         }
-        const token = jwt.sign({ userId: user._id, name: user.name, email }, process.env.SECRET_KEY, { expiresIn: '1d' });
-        res.json({ status: 200, message: "User sign in successfully!", token })
+        const token = generateToken({ userId: user._id, name: user.name, email: user.email });
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: false,
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+            sameSite: 'Strict',
+        });
+        res.status(200).json({ message: "User sign in successfully!", userId: user._id })
     } catch (error) {
-        console.log(error, "<--- error in sign controllers!")
-        res.json({ status: 500, message: "Internal server error!" })
+        next(error);
+    }
+}
+
+exports.logoutControllers = async (req, res, next) => {
+    try {
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: false,
+            sameSite: 'Strict'
+        });
+        res.status(200).json({ message: "Logout successfully!" })
+    } catch (error) {
+        next(error);
     }
 }

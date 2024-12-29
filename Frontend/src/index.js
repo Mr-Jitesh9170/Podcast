@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { IsLoginnedProvider, IsUserProvider, MediaProvider } from './context/context';
+import { UserProvider, MediaProvider, OpenProvider } from './context/context';
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <MediaProvider>
-    <IsLoginnedProvider>
-      <IsUserProvider>
+  <OpenProvider>
+    <MediaProvider>
+      <UserProvider>
         <App />
-      </IsUserProvider>
-    </IsLoginnedProvider>
-  </MediaProvider>
+      </UserProvider>
+    </MediaProvider>
+  </OpenProvider>
 );

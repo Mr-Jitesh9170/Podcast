@@ -1,5 +1,4 @@
-import { connect } from "../apis/auth.js";
-
+import { connect } from "./auth";
 
 // category lists podcast =>
 export const categoryLists = async (podcastCategory) => {
@@ -46,7 +45,7 @@ export const favouritePodLists = async (userId, setFavouritesLists) => {
     }
     try {
         let response = await connect.post("/podcast/favourite-podcast-lists", { userId });
-        return setFavouritesLists(response.data?.favritePodLists);
+        return setFavouritesLists(response?.data?.favritePodLists);
     } catch (error) {
         console.log(error, "<-- error in favouritePodLists lists!")
     }

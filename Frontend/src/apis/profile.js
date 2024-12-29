@@ -1,5 +1,4 @@
-import { connect } from "../apis/auth.js";
-
+import { connect } from "./auth";
 
 // user profile =>
 export const userProfileView = async (userId, setProfile) => {

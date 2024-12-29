@@ -12,7 +12,7 @@ const DashBoard = () => {
       isHide: false
     }
   )
-  
+
   const getAllCategoriesData = async () => {
     try {
       await Promise.all(podcastCategories.map(async ({ name }) => {
@@ -37,7 +37,7 @@ const DashBoard = () => {
         podcastCategories.map(({ name }, i) => {
           if (allCategories[name]?.length) {
             return (
-              <div className="dashboard-child-container" key={i} style={seeAll.isOpened === i && seeAll.isHide ? { height: "fit-content" } : { height: "80%" }}>
+              <div className="dashboard-child-container" key={i} style={seeAll.isOpened === i && seeAll.isHide ? { height: "fit-content" } : {height:"60%"}}>
                 <div className="child-top">
                   <h2>{name}</h2>
                   <span onClick={() => seeAllHandler(i)} >{seeAll.isHide && i === seeAll.isOpened ? "Hide all" : "Show all"}</span>

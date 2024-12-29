@@ -1,20 +1,12 @@
 
-// All left side dashboard icons =>
-// const HomeIcon = <MdHome size={27} />
-// const SearchIcon = <IoSearch size={27} />
-// const FavruitIcon = <MdOutlineFavorite size={27} />
-// const AccountIcon = <RiAccountPinCircleFill color="#2b6fc2" size={27} />
-// const ThreeDashIcon = <IoReorderThreeSharp size={27} color="#fff" />
-// const UploadIcon = <MdCloudUpload size={27} />
-// const CrossButtonIcon = <RxCross2 size={27} />
-// const LoginIcon = <MdLogin size={27} />
+import { MdHome } from "react-icons/md";
+import { IoSearch } from "react-icons/io5";
+import { MdOutlineFavorite } from "react-icons/md";
+import { RiAccountPinCircleFill } from "react-icons/ri";
+import { IoReorderThreeSharp } from "react-icons/io5";
+import { MdCloudUpload } from "react-icons/md";
+import { IoIosLogIn } from "react-icons/io";
 
-
-
-
-// ==============================================================================================>
-//  =============================== SEARCH PAGE DATA ======================================>
-// =====================================================================================>
 
 export const podcastCategories = [
   {
@@ -77,6 +69,23 @@ export const podcastCategories = [
     img: "https://images.squarespace-cdn.com/content/v1/5b6a11479f87707f6722bd01/1541786848970-Y0SCCZBCEY6OAE790VFB/MFM.jpg?format=1000w",
     color: "#6c4bb8"
   },
-
 ]
- 
+
+
+export const navbar = [
+  {
+    name: "Home",
+    routes: "/",
+    img: <MdHome size={27} />
+  },
+  {
+    name: "Search",
+    routes: "/podcast/search",
+    img: <IoSearch size={27} />
+  },
+  {
+    name: "Favourites",
+    routes: "/podcast/favourites",
+    img: <MdOutlineFavorite size={27} />
+  },
+]

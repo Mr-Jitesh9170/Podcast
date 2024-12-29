@@ -55,11 +55,11 @@ exports.userFavouritesPodcastLists = async (req, res, next) => {
         let favritePodLists = await favouritesPodModel.find({ userId }).populate(
             [
                 {
-                    path: "userId",
-                    select: "-password -token -email"
-                },
-                {
-                    path: "podcastId"
+                    path: "podcastId",
+                    populate: {
+                        path: "userId",
+                        select: "-password -email"
+                    },
                 }
             ]
         )

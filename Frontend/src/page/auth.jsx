@@ -1,16 +1,17 @@
 import "../styles/auth.scss";
 import GoogleIcon from "../Assets/google.webp";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { auth } from "../apis/auth";
 import { useNavigate } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { alert } from "../utils/alert";
-import { jwtDecode } from "jwt-decode";
 import { RxCross2 } from "react-icons/rx";
+import { OpenContext } from "../context/context";
 
-export const Auth = ({ setOpen }) => {
+const Auth = () => {
   const navigation = useNavigate();
+  const { closeAuthTab } = useContext(OpenContext)
   const [isLogin, setLogin] = useState(true)
   const [input, setInput] = useState(
     {
@@ -39,10 +40,9 @@ export const Auth = ({ setOpen }) => {
       }
       let data = await auth("/podcast/user/sign-in", { email: input.email, password: input.password });
       toast.success(data.message, alert)
-      const decodeToken = jwtDecode(data.token)
-      localStorage.setItem("userId", decodeToken.userId)
-      setOpen((prev) => ({ ...prev, isAuthOpen: false }))
-      navigation("/podcast/search")
+      localStorage.setItem("userId", data?.userId)
+      closeAuthTab();
+      navigation("/")
     }
   }
 
@@ -57,10 +57,7 @@ export const Auth = ({ setOpen }) => {
     setLogin(!isLogin)
   }
 
-  // close page =>
-  const handleClosed = () => {
-    setOpen((prev) => ({ ...prev, isAuthOpen: false }))
-  }
+
   return (
     <>
       {
@@ -69,7 +66,7 @@ export const Auth = ({ setOpen }) => {
             <div className="logIn-container">
               <div className="log-top1">
                 <span>Sign In</span>
-                <span onClick={handleClosed} >
+                <span onClick={closeAuthTab} >
                   <RxCross2 size={27} />
                 </span>
               </div>
@@ -97,7 +94,7 @@ export const Auth = ({ setOpen }) => {
             <div className="logIn-container">
               <div className="log-top1">
                 <span>Sign Up</span>
-                <span onClick={handleClosed} >
+                <span onClick={closeAuthTab} >
                   <RxCross2 size={27} />
                 </span>
               </div>
@@ -127,3 +124,5 @@ export const Auth = ({ setOpen }) => {
     </>
   )
 }
+
+export default Auth;

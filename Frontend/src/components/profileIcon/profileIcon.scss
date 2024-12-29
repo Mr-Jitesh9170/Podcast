@@ -1,0 +1,13 @@
+.accountIcon {
+  cursor: pointer;
+  display: flex;
+  gap: 5px;
+  padding: 4px 8px;
+  align-items: center;
+  border: 1px solid #cc83ff;
+  border-radius: 14px;
+  span {
+    color: #cc83ff;
+    font-weight: 600;
+  }
+}

@@ -20,6 +20,7 @@ const Favourites = ({ Name }) => {
     setFavourites({ podcastId, userId: localStorage.getItem("userId"), isFavourite: isAdded })
   }
 
+
   useEffect(() => {
     if (favourite.podcastId) {
       addOrRemoveFavouritePod(favourite)
@@ -34,8 +35,7 @@ const Favourites = ({ Name }) => {
       <div className="your-favourites-content">
         {
           favouritesLists?.map(({ podcastId, userId }) => {
-            podcastId.userId = userId;
-            return <Card isAdded={isAdded} podcast={podcastId} />
+            return <Card podcast={podcastId} />
           })
         }
       </div>
