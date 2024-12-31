@@ -7,12 +7,8 @@ export const connect = axios.create({
 });
 
 export const auth = async (routes, data) => {
-    try {
-        let results = await connect.post(routes, data);
-        return results.data;
-    } catch (error) {
-        console.log(error, "<--- Error in auth api!")
-    } 
+    let results = await connect.post(routes, data);
+    return results.data;
 }
 
 export const logout = async () => {

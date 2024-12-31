@@ -1,89 +1,31 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.podcaste-container {
-  position: relative;
+.Dashboard-container {
   width: 100%;
   height: 100%;
-  display: flex;
-
-  .para {
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    top: 0;
-    right: 0;
-    background-color: rgba(41, 44, 36, 0.844);
-  }
-
-  .left-container {
+  overflow-y: auto;
+  .dashboard-child-container {
     background-color: #1a1a1d;
-    width: 18%;
-    height: 100%;
-
-    .left-container-top {
-      height: 10%;
-      padding: 10px 12px;
+    padding: 25px 30px;
+    width: 95%;
+    margin: 20px auto;
+    border-radius: 7px;
+    overflow-y: hidden;
+    .child-top {
       display: flex;
-      align-items: center;
-      gap: 10px;
-
-      img {
-        width: 25px;
-      }
-
-      span {
-        font-weight: bold;
-        font-size: 22px;
-        color: #cc83ff;
-      }
-    }
-
-  }
-
-  .right-container {
-    width: 88%;
-    height: 100%;
-    background-color: #3b1c32;
-
-    .right-container-top {
-      height: 10%;
-      display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 10px 55px;
-      box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 5px 0px;
-      .threedashIcon {
-        fill: #a64d79;
+      h2 {
+        color: white;
+      }
+      span {
         cursor: pointer;
+        font-size: 14px;
+        color: #2b6fc2;
       }
     }
-
-    .right-container-bottom {
-      width: 100%;
-      height: 90%;
+    .child-bottom-content {
+      padding: 20px 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
     }
   }
-}
-
-::-webkit-scrollbar {
-  width: 4px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  display: none;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #cc83ff;
-  border-radius: 10px;
 }

@@ -25,14 +25,13 @@ const Profile = () => {
         formData.append("profilePhoto", profileImg);
         formData.append("userId", localStorage.getItem("userId"));
         let res = await profileUpload(formData)
-        window.location.reload();
         toast.success(res.message, alert)
     }
-
     useEffect(() => {
         userProfileView(localStorage.getItem("userId"), setProfile)
         yourPodcastLists(localStorage.getItem("userId"), setProfile);
     }, [])
+    
     return (
         <div className="your-profile-container">
             <div className="your-profile-top1">

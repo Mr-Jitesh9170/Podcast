@@ -21,46 +21,46 @@ const Auth = () => {
       password: ""
     }
   )
-
-  // handle submit =>
-  const handleSubmit = async (e) => {
-    let { name } = e.target;
-    if (name === "sign-up") {
-      if (input.name.trim() === "" || input.email.trim() === "" || input.password.trim() === "") {
-        toast.warning("Input filled missing!", alert)
-        return;
+  const handleSignUp = async () => {
+    for (const key in input) {
+      if (!input[key].trim()) {
+        return toast.warning(`${key} missing!`, alert)
       }
-      let data = await auth("/podcast/user/sign-up", input);
-      toast.success(data.message, alert)
-      setLogin(true)
     }
-    else if (name === "sign-in") {
-      if (input.email.trim() === "" || input.password.trim() === "") {
-        toast.warning("Input filled missing!", alert)
-        return;
-      }
+    try {
+      let response = await auth("/podcast/user/sign-up", input);
+      toast.success(response.message, alert)
+      setLogin(true)
+    } catch (error) {
+      toast.error(error.response.data.message, alert)
+    }
+  }
+  const handleSignIn = async () => {
+    if (input.email.trim() === "" || input.password.trim() === "") {
+      toast.warning("Input filled missing!", alert)
+      return;
+    }
+    try {
       let data = await auth("/podcast/user/sign-in", { email: input.email, password: input.password });
       toast.success(data.message, alert)
       localStorage.setItem("userId", data?.userId)
       setUser(data?.userId)
       closeAuthTab();
-      navigation("/home")
+      navigation("/podcast/home")
+      toast.success(data.message, alert)
+    } catch (error) {
+      toast.error(error.response.data.message, alert)
     }
   }
 
-  // handle input =>
-  const handleInput = (e) => {
+   const handleInput = (e) => {
     let { value, name } = e.target;
     setInput({ ...input, [name]: value })
   }
 
-  // switch sing in/sign up =>
-  const isLoggined = () => {
+   const isLoggined = () => {
     setLogin(!isLogin)
-  }
-
-
-
+  } 
   return (
     <div className="authConainer">
       {
@@ -87,7 +87,7 @@ const Auth = () => {
                 <input type="password" placeholder="enter password" name="password" value={input.password} onChange={handleInput} />
                 <a href="##">forgot password ?</a>
               </div>
-              <Button name={"Sign In"} btnName={"sign-in"} btnClick={handleSubmit} />
+              <Button name={"Sign In"} btnName={"sign-in"} btnClick={handleSignIn} />
               <div className="log-top5">
                 <span>Don't have an account ?</span>
                 <span href="" onClick={isLoggined}>Create Account</span>
@@ -115,7 +115,7 @@ const Auth = () => {
                 <input type="email" placeholder="Email" name="email" value={input.email} onChange={handleInput} />
                 <input type="password" placeholder="Password" name="password" value={input.password} onChange={handleInput} />
               </div>
-              <Button name={"Sign up"} btnName={"sign-up"} btnClick={handleSubmit} />
+              <Button name={"Sign up"} btnName={"sign-up"} btnClick={handleSignUp} />
               <div className="log-top5">
                 <span>Already have an account ?</span>
                 <span onClick={isLoggined}>Sign in</span>

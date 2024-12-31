@@ -9,18 +9,18 @@ exports.signUpControllers = async (req, res, next) => {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         let isEmail = emailPattern.test(email);
         if (!isEmail) {
-            return res.json({ status: 400, message: "Email is not valid!" });
+            return res.status(400).json({ message: "Email is not valid!" });
         }
         let user = await userModel.findOne({ email });
         if (user) {
-            return res.json({ status: 400, message: "User already exists!" });
+            return res.status(400).json({ message: "User already exists!" });
         }
         const saltRounds = 10;
         password = await bcrypt.hash(password, saltRounds);
         await userModel.create({ name, email, password });
-        res.json({ status: 201, message: "User sign up successfully!" })
+        res.status(201).json({ message: "User sign up successfully!" })
     } catch (error) {
-        next(error);
+        next(error)
     }
 }
 

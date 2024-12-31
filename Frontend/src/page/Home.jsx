@@ -1,37 +1,59 @@
-import { useState } from "react";
-import { Outlet } from "react-router-dom";
-import "../styles/home.scss";
-import Logo from "../Assets/Logo.png"
-import { IoReorderThreeSharp } from "react-icons/io5";
-import { ProfileIcon } from "../components/profileIcon/profileIcon";
-import { Navbar } from "../components/navbar/navbar";
+import "../styles/home.scss"
+import { Card } from "../components/card/card.jsx";
+import { useEffect, useState } from "react";
+import { categoryLists } from "../apis/upload.js";
+import { podcastCategories } from "../data/data.jsx";
 
 const Home = () => {
-  const [isLeftDashboard, setLeftDashboard] = useState(true);
-  const handleResize = () => {
-    setLeftDashboard(!isLeftDashboard)
+  const [allCategories, setAllCategories] = useState({});
+  const [seeAll, setSeeAll] = useState(
+    {
+      isOpened: "",
+      isHide: false
+    }
+  )
+
+  const getAllCategoriesData = async () => {
+    try {
+      await Promise.all(podcastCategories.map(async ({ name }) => {
+        let categoryData = await categoryLists(name);
+        await setAllCategories((prevState) => ({ ...prevState, [name]: categoryData }))
+      }))
+    } catch (error) {
+      console.log(error, "<--- error in getAllCategoriesData data!")
+    }
   }
 
+  const seeAllHandler = (index) => {
+    setSeeAll({ isOpened: index, isHide: !seeAll.isHide })
+  }
+
+  useEffect(() => {
+    getAllCategoriesData();
+  }, [])
   return (
-    <div className="podcaste-container">
-      <div className="left-container" style={isLeftDashboard ? { display: "block" } : { display: "none" }}>
-        <div className="left-container-top">
-          <img src={Logo} alt="" />
-          <span>PODCAST</span>
-        </div>
-        <Navbar />
-      </div >
-      <div className="right-container" style={isLeftDashboard ? null : { width: "100%" }}>
-        <div className="right-container-top">
-          <div className="threedashIcon" onClick={handleResize} >
-            <IoReorderThreeSharp size={27} color="#fff" />
-          </div>
-          <ProfileIcon />
-        </div>
-        <div className="right-container-bottom" >
-          <Outlet />
-        </div>
-      </div>
+    <div className="Dashboard-container">
+      {
+        podcastCategories.map(({ name }, i) => {
+          if (allCategories[name]?.length) {
+            return (
+              <div className="dashboard-child-container" key={i} style={seeAll.isOpened === i && seeAll.isHide ? { height: "fit-content" } : { height: "60%" }}>
+                <div className="child-top">
+                  <h2>{name}</h2>
+                  <span onClick={() => seeAllHandler(i)} >{seeAll.isHide && i === seeAll.isOpened ? "Hide all" : "Show all"}</span>
+                </div>
+                <div className="child-bottom-content">
+                  {
+                    allCategories[name]?.map((podcastData, j) => {
+                      return <Card podcast={podcastData} key={j} />
+                    })
+                  }
+                </div>
+              </div>
+            )
+          }
+        })
+      }
     </div >
   )
 }

@@ -2,11 +2,7 @@
 import { MdHome } from "react-icons/md";
 import { IoSearch } from "react-icons/io5";
 import { MdOutlineFavorite } from "react-icons/md";
-import { RiAccountPinCircleFill } from "react-icons/ri";
-import { IoReorderThreeSharp } from "react-icons/io5";
-import { MdCloudUpload } from "react-icons/md";
-import { IoIosLogIn } from "react-icons/io";
-
+  
 
 export const podcastCategories = [
   {
@@ -75,7 +71,7 @@ export const podcastCategories = [
 export const navbar = [
   {
     name: "Home",
-    routes: "/home",
+    routes: "/podcast/home",
     img: <MdHome size={27} />
   },
   {
