@@ -24,14 +24,19 @@ const Profile = () => {
         let formData = new FormData();
         formData.append("profilePhoto", profileImg);
         formData.append("userId", localStorage.getItem("userId"));
-        let res = await profileUpload(formData)
-        toast.success(res.message, alert)
+        try {
+            let res = await profileUpload(formData);
+            userProfileView(localStorage.getItem("userId"), setProfile)
+            toast.success(res.message, alert);
+        } catch (error) {
+            toast.error(error.response.data.message, alert)
+        }
     }
     useEffect(() => {
         userProfileView(localStorage.getItem("userId"), setProfile)
         yourPodcastLists(localStorage.getItem("userId"), setProfile);
     }, [])
-    
+
     return (
         <div className="your-profile-container">
             <div className="your-profile-top1">
@@ -56,7 +61,7 @@ const Profile = () => {
                 <h2>Your Uploads</h2>
                 <div className="yourPodcast">
                     {
-                        profile?.podcastLists.map((podcast) => {
+                        profile.podcastLists?.map((podcast) => {
                             return <Card podcast={podcast} />
                         })
                     }

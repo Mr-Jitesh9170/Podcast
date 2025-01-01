@@ -28,11 +28,11 @@ exports.categoryWisePodlists = async (req, res) => {
 
 // add/remove favourite podcasts =>
 exports.addOrRemoveFavouritePod = async (req, res, next) => {
-    let { userId, podcastId, isFavourite } = req.body
-    console.log(req.body)
-    if (!userId || !podcastId || typeof isFavourite !== "boolean") {
+    let { podcastId, isFavourite } = req.body
+    if (!podcastId || typeof isFavourite !== "boolean") {
         return res.json({ status: 400, message: "Field missing!" })
     }
+    let userId = req.user.userId;
     try {
         if (isFavourite) {
             await favouritesPodModel.create({ userId, podcastId })

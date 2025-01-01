@@ -19,7 +19,7 @@ const Upload = () => {
   const [next, setNext] = useState(true);
   const [uploadPod, setUploadPod] = useState(
     {
-      userId: isUser,
+      userId: isUser ?? "",
       episodeImgPath: "",
       isMedia: "Audio",
       podcastCategory: "Culture",

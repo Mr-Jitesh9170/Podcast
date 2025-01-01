@@ -11,12 +11,14 @@ const Dashboard = () => {
   const handleResize = () => {
     setLeftDashboard(!isLeftDashboard);
   }
-  return ( 
+  return (
     <>
       <div className="podcaste-container">
         <div className="left-container" style={isLeftDashboard ? { display: "block" } : { display: "none" }}>
           <div className="left-container-top">
-            <img src={Logo} alt="" />
+            <div className="img">
+              <img src={Logo} alt="" />
+            </div>
             <span>PODCAST</span>
           </div>
           <Navbar />

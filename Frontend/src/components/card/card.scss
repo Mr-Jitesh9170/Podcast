@@ -65,9 +65,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    text-decoration: none;
     cursor: pointer;
     span {
       font-weight: bold;
+    }
+    &:hover{
+      background-color: #a64d7a76;
+      color: #fff;
     }
   }
   transition: all 0.4s;

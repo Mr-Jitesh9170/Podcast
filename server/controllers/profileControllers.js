@@ -26,7 +26,7 @@ exports.profileUploadControllers = async (req, res) => {
     }
     try {
         await userModel.findOneAndUpdate({ _id: userId }, { profilePhoto: req.file.filename })
-        res.json({ status: 200, message: "Profile photo updated!" })
+        res.json({ status: 200, message: "Profile photo updated!", profilePhoto: req.file.filename })
     } catch (error) {
         next(error)
     }
