@@ -2,7 +2,7 @@ const userModel = require("../models/register.js")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 
-
+ 
 exports.signUpControllers = async (req, res, next) => {
     let { name, email, password } = req.body;
     try {

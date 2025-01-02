@@ -8,11 +8,11 @@ const cookieParser = require('cookie-parser')
 const app = express();
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: process.env.FRONTEND_URL,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization'],
 }
+
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 app.use(cookieParser())
