@@ -29,10 +29,10 @@ const Auth = () => {
     }
     try {
       let response = await auth("/podcast/user/sign-up", input);
-      toast.success(response.message, alert)
+      toast.success(response?.message, alert)
       setLogin(true)
     } catch (error) {
-      toast.error(error.response.data.message, alert)
+      toast.error(error.response?.data?.message, alert)
     }
   }
   const handleSignIn = async () => {
@@ -42,14 +42,14 @@ const Auth = () => {
     }
     try {
       let data = await auth("/podcast/user/sign-in", { email: input.email, password: input.password });
-      toast.success(data.message, alert)
+      toast.success(data?.message, alert)
       localStorage.setItem("userId", data?.userId)
       setUser(data?.userId)
       closeAuthTab();
       navigation("/podcast/home")
-      toast.success(data.message, alert)
+      toast.success(data?.message, alert)
     } catch (error) {
-      toast.error(error.response.data.message, alert)
+      toast.error(error.response?.data?.message, alert)
     }
   }
 

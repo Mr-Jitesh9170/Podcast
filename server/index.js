@@ -7,11 +7,11 @@ const cookieParser = require('cookie-parser')
 
 const app = express();
 
-
+ 
 // middleware =>
 app.use(cookieParser())
 app.use(cors(
-  {
+  { 
     origin: "http://localhost:3000",
     credentials: true
   }
@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('media'));
 
-
+ 
 // db connected => 
 mongoConnect();
 

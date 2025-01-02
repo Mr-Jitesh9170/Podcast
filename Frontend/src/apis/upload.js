@@ -54,11 +54,12 @@ export const favouritePodLists = async (userId, setFavouritesLists) => {
 // add/remove favrourite podcasts =>
 export const addOrRemoveFavouritePod = async (favourite) => {
     try {
-        await connect.post("/podcast/add-or-remove-favourite-podcasts", favourite);
+        let res = await connect.post("/podcast/add-or-remove-favourite-podcasts", favourite);
+        return res.data;
     } catch (error) {
         console.log(error, "<-- error in addOrRemoveFavouritePod!")
     }
-} 
+}
 
 
 // poadcast view count =>

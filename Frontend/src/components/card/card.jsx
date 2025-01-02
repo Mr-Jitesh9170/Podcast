@@ -18,7 +18,7 @@ export const Card = ({ podcast }) => {
   const handleFavPod = async () => {
     try {
       let res = await addOrRemoveFavouritePod({ podcastId: podcast._id, isFavourite: true })
-      toast.success(res.data.message, alert);
+      toast.success(res.message, alert);
     } catch (error) {
       toast.error(error.response.data.message, alert)
     }

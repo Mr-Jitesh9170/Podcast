@@ -5,7 +5,6 @@ import { Card } from "../card/card";
 import { categoryLists } from "../../apis/upload";
 
 const Category = () => {
-
     const { category } = useParams();
     const [categorylists, setCategoryLists] = useState([])
 
@@ -17,10 +16,10 @@ const Category = () => {
         getCategoryData();
     }, [])
     return (
-        <>
-            <div className="categoryContainer">
+        <div className="container">
+            <div className="episodesContainer" >
                 <h2>{category}</h2>
-                <div className="card" >
+                <div className="card">
                     {
                         categorylists?.map((categrylist) => {
                             return <Card podcast={categrylist} />
@@ -28,7 +27,7 @@ const Category = () => {
                     }
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
