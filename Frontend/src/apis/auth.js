@@ -6,17 +6,16 @@ export const connect = axios.create({
     withCredentials: true
 });
 
-
-connect.interceptors.response.use(
-    (response) => response,
-    (error) => {
-        if (error.response && error.response.status === 401) {
-            alert('Your session has expired. Please log in again.');
-            localStorage.removeItem('userId');
-        }
-        return Promise.reject(error);
-    }
-);
+// connect.interceptors.response.use(
+//     (response) => response,
+//     (error) => {
+//         if (error.response && error.response.status === 401) {
+//             alert('Your session has expired. Please log in again.');
+//             localStorage.removeItem('userId');
+//         }
+//         return Promise.reject(error);
+//     }
+// );
 
 export const auth = async (routes, data) => {
     let results = await connect.post(routes, data);
