@@ -1,6 +1,6 @@
 import axios from "axios";
 
-let URL = 'https://podcast-jc3g.onrender.com'
+let URL = 'https://podcast-t43s.onrender.com'
 export const connect = axios.create({
     baseURL: URL,
     withCredentials: true

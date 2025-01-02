@@ -7,20 +7,20 @@ const cookieParser = require('cookie-parser')
 
 const app = express();
 
- 
-// middleware =>
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(cookieParser())
-app.use(cors(
-  { 
-    origin: "http://localhost:3000",
-    credentials: true
-  }
-));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('media'));
 
- 
+
 // db connected => 
 mongoConnect();
 

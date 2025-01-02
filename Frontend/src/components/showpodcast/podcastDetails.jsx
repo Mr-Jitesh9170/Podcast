@@ -46,7 +46,7 @@ const PodcastDetails = () => {
                         return (
                             <div className={`episode ${isMedia === "Audio" ? "audio" : "video"}`} onClick={() => handleEpisodePlayer(_id, episodeName, episodeDescription, episodeImgPath, episodeVideoPath, isMedia)}>
                                 <div className="episodeThumbnail">
-                                    <img src={episodeImgPath ? `http://localhost:8080/${episodeImgPath}` : "https://hbr.org/resources/images/article_assets/2019/03/Mar19_19_jason-rosewell-60014-unsplash_3.jpg"} alt="" />
+                                    <img src={episodeImgPath ? `https://podcast-t43s.onrender.com/${episodeImgPath}` : "https://hbr.org/resources/images/article_assets/2019/03/Mar19_19_jason-rosewell-60014-unsplash_3.jpg"} alt="" />
                                 </div>
                                 <div className="episodeDetails">
                                     <h3 className="episodeName">{episodeName}</h3>

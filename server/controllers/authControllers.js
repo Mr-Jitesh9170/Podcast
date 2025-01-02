@@ -50,8 +50,8 @@ exports.signInControllers = async (req, res, next) => {
         res.cookie('token', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-            sameSite: process.env.NODE_ENV === 'production' ? 'Strict' : 'Lax',
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+            sameSite: 'Strict'
         });
         res.status(200).json({ message: "User sign in successfully!", userId: user._id })
     } catch (error) {
