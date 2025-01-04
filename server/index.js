@@ -16,6 +16,7 @@ const corsOptions = {
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   credentials: true,
 };
+app.options("*", cors(corsOptions))
 app.use(cors(corsOptions));
 app.use(morgan('combined'));
 app.use(cookieParser())
