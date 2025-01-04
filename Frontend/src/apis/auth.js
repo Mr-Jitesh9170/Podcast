@@ -2,6 +2,8 @@ import axios from "axios";
 
 let URL = 'https://podcast-t43s.onrender.com'
 
+export let mediaURL = `${URL}/media`;
+
 export const connect = axios.create({
     baseURL: URL,
     withCredentials: true,

@@ -5,6 +5,7 @@ import { Circuler } from "../circuler/circuler";
 import { addOrRemoveFavouritePod } from "../../apis/upload";
 import { ToastContainer, toast } from "react-toastify";
 import { alert } from "../../utils/alert";
+import { mediaURL } from "../../apis/auth";
 
 export const Card = ({ podcast }) => {
 
@@ -21,7 +22,7 @@ export const Card = ({ podcast }) => {
     <>
       <Link to={`/podcast/podcast-details/${podcast?.userId?._id}`} className={`cardContainer ${podcast?.isMedia === "Audio" ? "audio" : "video"}`}>
         <div className="img">
-          <img src={podcast?.episodeImgPath ? `https://podcast-t43s.onrender.com/media/${podcast?.episodeImgPath}` : "https://hbr.org/resources/images/article_assets/2019/03/Mar19_19_jason-rosewell-60014-unsplash_3.jpg"} alt="loading" />
+          <img src={podcast?.episodeImgPath ? `${mediaURL}/${podcast?.episodeImgPath}` : "https://hbr.org/resources/images/article_assets/2019/03/Mar19_19_jason-rosewell-60014-unsplash_3.jpg"} alt="loading" />
         </div>
         <h3>{podcast?.episodeName}</h3>
         <p>{podcast?.episodeDescription}</p>

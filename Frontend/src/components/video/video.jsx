@@ -1,7 +1,7 @@
 import "./video.scss"
 import { useContext } from "react"
 import { MediaPlayerContext } from "../../context/context"
-
+import { mediaURL } from "../../apis/auth"
 
 export const VideoPlayer = ({ media }) => {
     const { setMedia } = useContext(MediaPlayerContext)
@@ -13,7 +13,7 @@ export const VideoPlayer = ({ media }) => {
             <div className="videos">
                 <div className="videoDisplay">
                     <video className="responsiveVideo" controls autoPlay>
-                        <source src={`https://podcast-t43s.onrender.com/${media?.episodePath}`} type="video/mp4" />
+                        <source src={`${mediaURL}/${media?.episodePath}`} type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
                 </div>
