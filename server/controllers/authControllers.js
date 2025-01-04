@@ -2,7 +2,7 @@ const userModel = require("../models/register.js")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 
- 
+
 exports.signUpControllers = async (req, res, next) => {
     let { name, email, password } = req.body;
     try {
@@ -15,10 +15,10 @@ exports.signUpControllers = async (req, res, next) => {
         if (user) {
             return res.status(400).json({ message: "User already exists!" });
         }
-        const saltRounds = 10; 
+        const saltRounds = 10;
         password = await bcrypt.hash(password, saltRounds);
         await userModel.create({ name, email, password });
-        res.status(201).json({ message: "User sign up successfully!" }) 
+        res.status(201).json({ message: "User sign up successfully!" })
     } catch (error) {
         next(error)
     }
@@ -45,7 +45,7 @@ exports.signInControllers = async (req, res, next) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             maxAge: 7 * 24 * 60 * 60 * 1000,
-            sameSite: 'Strict'
+            sameSite: process.env.NODE_ENV === 'production' ? 'Strict' : 'Lax'
         });
         res.status(200).json({ message: "User sign in successfully!", userId: user._id })
     } catch (error) {

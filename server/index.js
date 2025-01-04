@@ -13,20 +13,10 @@ app.use(helmet());
 const cors = require("cors");
 const corsOptions = {
   origin: process.env.FRONTEND_URL,
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   credentials: true,
 };
 app.use(cors(corsOptions));
-app.options('*', (req, res) => {
-  res.header("Access-Control-Allow-Origin", process.env.FRONTEND_URL);
-  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.sendStatus(204);
-});
-
-
-
 app.use(morgan('combined'));
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }));
