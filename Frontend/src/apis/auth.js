@@ -1,6 +1,8 @@
 import axios from "axios";
 
-let URL = 'https://podcast-t43s.onrender.com'
+// let URL = 'https://podcast-t43s.onrender.com'
+let URL = "http://localhost:8080"
+
 export const connect = axios.create({
     baseURL: URL,
     withCredentials: true
@@ -18,8 +20,12 @@ export const connect = axios.create({
 // );
 
 export const auth = async (routes, data) => {
-    let results = await connect.post(routes, data);
-    return results.data;
+    try {
+        let results = await connect.post(routes, data);
+        return results.data;
+    } catch (error) {
+        console.log(error, "<--- error in auth apis!")
+    }
 }
 
 export const logout = async () => {

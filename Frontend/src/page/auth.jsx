@@ -9,6 +9,7 @@ import { alert } from "../utils/alert";
 import { RxCross2 } from "react-icons/rx";
 import { OpenContext, UserContext } from "../context/context";
 import { Button } from "./../components/button/button"
+
 const Auth = () => {
   const navigation = useNavigate();
   const { setUser } = useContext(UserContext);

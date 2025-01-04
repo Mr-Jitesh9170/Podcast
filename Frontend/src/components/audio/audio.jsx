@@ -1,14 +1,12 @@
 import React from 'react'
 import "./audio.scss"
-import bigDawg from "./Big Dawgs - (Raag.Fm).mp3"
 
 export const AudioPlayer = ({ media }) => {
-
     return (
         <div className="audioPlayerContainer">
             <div className="audioDetails">
                 <div className="audioImg">
-                    <img src={media?.thumbnail ? `https://podcast-t43s.onrender.com/${media?.thumbnail}` : "https://cdn.dxomark.com/wp-content/uploads/medias/post-32965/shutterstock_1427568797-1-2-1024x768.jpg"} alt="" />
+                    <img src={`https://podcast-t43s.onrender.com/${media?.thumbnail}`} alt="" />
                 </div>
                 <div className="audioName">
                     <span>{media.episodeName}</span>
@@ -17,12 +15,11 @@ export const AudioPlayer = ({ media }) => {
             </div>
             <div className="audio">
                 <audio controls autoPlay >
-                    <source src={media?.episodePath ? `https://podcast-t43s.onrender.com/${media?.episodePath}` : bigDawg} type="audio/ogg" />
-                    <source src="horse.mp3" type="audio/mpeg" />
+                    <source src={`https://podcast-t43s.onrender.com/${media?.episodePath}`} type="audio/ogg" />
+                    <source src={`https://podcast-t43s.onrender.com/${media?.episodePath}`} type="audio/mpeg" />
                     Your browser does not support the audio element.
                 </audio>
             </div>
         </div>
     )
 }
- 

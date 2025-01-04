@@ -23,7 +23,7 @@ exports.categoryWisePodlists = async (req, res) => {
         res.json({ status: 200, message: `${podcastCategory} lists!`, podcastCategoryLists })
     } catch (error) {
         next(error)
-    }
+    } 
 }
 
 // add/remove favourite podcasts =>

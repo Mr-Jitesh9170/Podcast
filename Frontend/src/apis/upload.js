@@ -6,7 +6,7 @@ export const categoryLists = async (podcastCategory) => {
         let response = await connect.post("/podcast/category-podcast-lists", { podcastCategory });
         return response.data?.podcastCategoryLists
     } catch (error) {
-        console.log(error, "<-- error in create podcast!")
+        console.log(error, "<-- error in categoryLists podcast!")
     }
 }
 

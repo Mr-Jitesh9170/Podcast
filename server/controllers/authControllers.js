@@ -15,10 +15,10 @@ exports.signUpControllers = async (req, res, next) => {
         if (user) {
             return res.status(400).json({ message: "User already exists!" });
         }
-        const saltRounds = 10;
+        const saltRounds = 10; 
         password = await bcrypt.hash(password, saltRounds);
         await userModel.create({ name, email, password });
-        res.status(201).json({ message: "User sign up successfully!" })
+        res.status(201).json({ message: "User sign up successfully!" }) 
     } catch (error) {
         next(error)
     }
@@ -41,12 +41,6 @@ exports.signInControllers = async (req, res, next) => {
             return res.status(400).json({ message: "User password is wrong!" })
         }
         const token = generateToken({ userId: user._id, name: user.name, email: user.email });
-        // res.cookie('token', token, { 
-        //     httpOnly: true,
-        //     secure: false,
-        //     maxAge: 7 * 24 * 60 * 60 * 1000,
-        //     sameSite: 'Strict',
-        // });
         res.cookie('token', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',

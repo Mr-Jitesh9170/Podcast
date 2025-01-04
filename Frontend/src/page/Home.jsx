@@ -11,7 +11,7 @@ const Home = () => {
       isOpened: "",
       isHide: false
     }
-  )
+  ) 
 
   const getAllCategoriesData = async () => {
     try {
