@@ -7,6 +7,7 @@ import { podcastViewCount, yourPodcastLists } from "../../apis/upload";
 import { userProfileView } from "../../apis/profile";
 import { MediaPlayerContext } from "../../context/context";
 import { mediaURL } from "../../apis/auth";
+import useLoader from "../../hooks/loader";
 
 const PodcastDetails = () => {
     const { setMedia } = useContext(MediaPlayerContext)
@@ -17,6 +18,7 @@ const PodcastDetails = () => {
             podcastLists: []
         }
     );
+    const { setLoading, loading, Loader } = useLoader();
 
     const handleEpisodePlayer = async (podcastId, episodeName, episodeDescription, thumbnail, episodePath, isMedia) => {
         await podcastViewCount({ podcastId, userId: localStorage.getItem("userId") })
@@ -25,7 +27,9 @@ const PodcastDetails = () => {
 
     useEffect(() => {
         userProfileView(id, setProfile);
-        yourPodcastLists(id, setProfile);
+        yourPodcastLists(id, setProfile).finally(() => {
+            setLoading(false)
+        });
     }, [])
 
     return (
@@ -43,26 +47,29 @@ const PodcastDetails = () => {
             <div className="allEpisods">
                 <h3 className="heading" style={{ marginBottom: "10px" }}>All Episodes</h3>
                 {
-                    profile.podcastLists?.map(({ _id, episodeName, viewCount, episodeDescription, episodeImgPath, episodeVideoPath, isMedia, userId }) => {
-                        return (
-                            <div className={`episode ${isMedia === "Audio" ? "audio" : "video"}`} onClick={() => handleEpisodePlayer(_id, episodeName, episodeDescription, episodeImgPath, episodeVideoPath, isMedia)}>
-                                <div className="episodeThumbnail">
-                                    <img src={episodeImgPath ? `${mediaURL}/${episodeImgPath}` : "https://hbr.org/resources/images/article_assets/2019/03/Mar19_19_jason-rosewell-60014-unsplash_3.jpg"} alt="" />
-                                </div>
-                                <div className="episodeDetails">
-                                    <h3 className="episodeName">{episodeName}</h3>
-                                    <p className="episodeAbout">{episodeDescription}</p>
-                                    <div className="channelDetails">
-                                        <div className="logo">
-                                            <Circuler width={20} height={20} img={userId?.profilePhoto} />
-                                            <span>{userId?.name}</span>
+                    loading ?
+                        <Loader />
+                        :
+                        profile.podcastLists?.map(({ _id, episodeName, viewCount, episodeDescription, episodeImgPath, episodeVideoPath, isMedia, userId }) => {
+                            return (
+                                <div className={`episode ${isMedia === "Audio" ? "audio" : "video"}`} onClick={() => handleEpisodePlayer(_id, episodeName, episodeDescription, episodeImgPath, episodeVideoPath, isMedia)}>
+                                    <div className="episodeThumbnail">
+                                        <img src={episodeImgPath ? `${mediaURL}/${episodeImgPath}` : "https://hbr.org/resources/images/article_assets/2019/03/Mar19_19_jason-rosewell-60014-unsplash_3.jpg"} alt="" />
+                                    </div>
+                                    <div className="episodeDetails">
+                                        <h3 className="episodeName">{episodeName}</h3>
+                                        <p className="episodeAbout">{episodeDescription}</p>
+                                        <div className="channelDetails">
+                                            <div className="logo">
+                                                <Circuler width={20} height={20} img={userId?.profilePhoto} />
+                                                <span>{userId?.name}</span>
+                                            </div>
+                                            <div className="views">{viewCount} • views</div>
                                         </div>
-                                        <div className="views">{viewCount} • views</div>
                                     </div>
                                 </div>
-                            </div>
-                        )
-                    })
+                            )
+                        })
                 }
             </div>
         </div>

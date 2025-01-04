@@ -21,7 +21,19 @@ app.use(morgan('combined'));
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use('/media', cors(corsOptions), express.static('media'));
+
+
+app.use('/media', (req, res, next) => {
+  res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
+app.use('/media', express.static('media'));
+
+
+
 
 mongoConnect();
 

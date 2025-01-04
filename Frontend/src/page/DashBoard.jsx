@@ -11,6 +11,7 @@ const Dashboard = () => {
   const handleResize = () => {
     setLeftDashboard(!isLeftDashboard);
   }
+
   return (
     <>
       <div className="podcaste-container">

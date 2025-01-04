@@ -1,5 +1,4 @@
 import { createContext, useState } from "react";
-import ClipLoader from "react-spinners/ClipLoader";
 
 // is user loggined =>
 export const UserContext = createContext();
@@ -48,36 +47,5 @@ export const MediaProvider = ({ children }) => {
         <MediaPlayerContext.Provider value={{ media, setMedia }}>
             {children}
         </MediaPlayerContext.Provider>
-    )
-}
-
-// loader =>
-const LoaderContext = createContext();
-export const LoaderProvider = ({ children }) => {
-    let [loading, setLoading] = useState(true);
-    let [color, setColor] = useState("#ffffff");
-
-    const CSSProperties = {
-        display: "block",
-        margin: "0 auto",
-        borderColor: "red",
-    };
-
-    const Loader = () => {
-        return (
-            <ClipLoader
-                color={color}
-                loading={loading}
-                cssOverride={CSSProperties}
-                size={150}
-                aria-label="Loading Spinner"
-                data-testid="loader"
-            />
-        )
-    }
-    return (
-        <LoaderContext.Provider value={{ Loader, setLoading, setColor }}>
-            {children}
-        </LoaderContext.Provider>
     )
 }

@@ -9,6 +9,7 @@ import { FaEdit } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { alert } from "../utils/alert";
+import useLoader from "../hooks/loader";
 
 const Profile = () => {
     const [profile, setProfile] = useState(
@@ -17,7 +18,7 @@ const Profile = () => {
             podcastLists: []
         }
     );
-
+    const { setLoading, loading, Loader } = useLoader();
     const profileHandler = async (e) => {
         let { files } = e.target;
         let profileImg = files[0];
@@ -34,7 +35,9 @@ const Profile = () => {
     }
     useEffect(() => {
         userProfileView(localStorage.getItem("userId"), setProfile)
-        yourPodcastLists(localStorage.getItem("userId"), setProfile);
+        yourPodcastLists(localStorage.getItem("userId"), setProfile).finally(() => {
+            setLoading(false)
+        });
     }, [])
 
     return (
@@ -61,14 +64,16 @@ const Profile = () => {
                 <h2>Your Uploads</h2>
                 <div className="yourPodcast">
                     {
-                        profile.podcastLists?.map((podcast) => {
-                            return <Card podcast={podcast} />
-                        })
+                        loading ?
+                            <Loader />
+                            :
+                            profile.podcastLists?.map((podcast) => {
+                                return <Card podcast={podcast} />
+                            })
                     }
                 </div>
             </div>
             <ToastContainer />
-
         </div>
     )
 }

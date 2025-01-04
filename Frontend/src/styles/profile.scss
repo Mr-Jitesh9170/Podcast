@@ -1,17 +1,15 @@
 .your-profile-container {
   width: 100%;
   height: 100%;
-  padding: 25px 30px;
-  display: flex;
-  flex-direction: column;
+  padding: 13px 16px;
   color: white;
-  overflow-y: scroll;
 
   .your-profile-top1 {
     padding: 25px 30px;
     border-radius: 7px 7px 0 0;
     background-color: #1a1a1d;
     width: 100%;
+    height: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,23 +41,28 @@
   }
 
   .your-profile-top2 {
-    padding: 25px 30px;
     border-radius: 0 0 7px 7px;
     background-color: #1a1a1d;
     width: 100%;
+    height: 75%;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    row-gap: 5px;
+    padding-top: 5px;
+    h2,
+    .yourPodcast {
+      padding: 12px 30px;
+    }
     h2 {
       align-self: flex-start;
     }
     .yourPodcast {
       width: 100%;
       height: 100%;
+      overflow-y: scroll;
       display: flex;
       column-gap: 7px;
       row-gap: 15px;
-
       flex-wrap: wrap;
     }
   }
