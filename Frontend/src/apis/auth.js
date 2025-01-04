@@ -1,7 +1,6 @@
 import axios from "axios";
 
 let URL = 'https://podcast-t43s.onrender.com'
-// let URL = "http://localhost:8080"
 
 export const connect = axios.create({
     baseURL: URL,

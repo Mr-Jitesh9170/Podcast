@@ -2,13 +2,12 @@ import "./card.scss"
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Circuler } from "../circuler/circuler";
-import { useEffect } from "react";
 import { addOrRemoveFavouritePod } from "../../apis/upload";
 import { ToastContainer, toast } from "react-toastify";
 import { alert } from "../../utils/alert";
 
 export const Card = ({ podcast }) => {
- 
+
   const handleFavPod = async () => {
     try {
       let res = await addOrRemoveFavouritePod({ podcastId: podcast._id, isFavourite: true })

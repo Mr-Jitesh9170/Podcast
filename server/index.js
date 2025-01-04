@@ -9,7 +9,6 @@ const morgan = require("morgan");
 
 app.use(helmet());
 
-
 const cors = require("cors");
 const corsOptions = {
   origin: process.env.FRONTEND_URL,
@@ -22,7 +21,7 @@ app.use(morgan('combined'));
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('media'));
+app.use('/media', express.static('media'));
 
 mongoConnect();
 
