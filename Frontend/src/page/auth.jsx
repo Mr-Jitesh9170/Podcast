@@ -1,6 +1,6 @@
 import "../styles/auth.scss";
 import GoogleIcon from "../Assets/google.webp";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { auth } from "../apis/auth";
 import { useNavigate } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
@@ -9,7 +9,7 @@ import { alert } from "../utils/alert";
 import { RxCross2 } from "react-icons/rx";
 import { OpenContext, UserContext } from "../context/context";
 import { Button } from "./../components/button/button"
-
+import useLoader from "./../hooks/loader";
 const Auth = () => {
   const navigation = useNavigate();
   const { setUser } = useContext(UserContext);
@@ -22,6 +22,8 @@ const Auth = () => {
       password: ""
     }
   )
+  const { loading, setLoading, setColor, Loader } = useLoader();
+
   const handleSignUp = async () => {
     for (const key in input) {
       if (!input[key].trim()) {
@@ -35,33 +37,46 @@ const Auth = () => {
     } catch (error) {
       toast.error(error.response?.data?.message, alert)
     }
+
   }
+
   const handleSignIn = async () => {
     if (input.email.trim() === "" || input.password.trim() === "") {
       toast.warning("Input filled missing!", alert)
       return;
     }
     try {
+      setLoading(true);
       let data = await auth("/podcast/user/sign-in", { email: input.email, password: input.password });
-      toast.success(data?.message, alert)
-      localStorage.setItem("userId", data?.userId)
-      setUser(data?.userId)
-      closeAuthTab();
-      navigation("/podcast/home")
-      toast.success(data?.message, alert)
+      if (data?.userId) {
+        localStorage.setItem("userId", data?.userId)
+        setUser(data?.userId)
+        toast.success(data?.message, alert)
+        closeAuthTab();
+        navigation("/podcast/home")
+      } else {
+        toast.error("Please try again", alert)
+      }
     } catch (error) {
       toast.error(error.response?.data?.message, alert)
+    } finally {
+      setLoading(false)
     }
   }
 
-   const handleInput = (e) => {
+  const handleInput = (e) => {
     let { value, name } = e.target;
     setInput({ ...input, [name]: value })
   }
 
-   const isLoggined = () => {
+  const isLoggined = () => {
     setLogin(!isLogin)
-  } 
+  }
+
+  useEffect(() => {
+    setLoading(false)
+    setColor("#fff")
+  }, [])
   return (
     <div className="authConainer">
       {
@@ -88,7 +103,7 @@ const Auth = () => {
                 <input type="password" placeholder="enter password" name="password" value={input.password} onChange={handleInput} />
                 <a href="##">forgot password ?</a>
               </div>
-              <Button name={"Sign In"} btnName={"sign-in"} btnClick={handleSignIn} />
+              <Button name={loading ? <Loader size={15} /> : "Sign In"} btnName={"sign-in"} btnClick={handleSignIn} />
               <div className="log-top5">
                 <span>Don't have an account ?</span>
                 <span href="" onClick={isLoggined}>Create Account</span>

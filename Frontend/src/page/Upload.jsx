@@ -50,8 +50,8 @@ const Upload = () => {
     }
     let resPod = await createPodcast(uploadPodData);
     if (resPod) {
-      navigate("/podcast/profile")
       toast.success("Podcast uploaded!", alert)
+      navigate("/podcast/profile")
       closeUploadTab();
     } else {
       toast.warning("Something went wrong!")

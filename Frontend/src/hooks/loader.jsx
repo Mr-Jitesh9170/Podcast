@@ -6,19 +6,15 @@ const useLoader = () => {
     let [color, setColor] = useState("#2b6fc2");
     const CSSProperties = {
         display: "block",
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
+        margin: "0 auto",
     };
-
-    const Loader = () => {
+    const Loader = ({ size }) => {
         return (
             <ClipLoader
                 color={color}
                 loading={loading}
                 cssOverride={CSSProperties}
-                size={50}
+                size={size ?? 50}
                 aria-label="Loading Spinner"
                 data-testid="loader"
             />

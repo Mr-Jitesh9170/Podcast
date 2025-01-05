@@ -3,19 +3,21 @@ import { navbar } from "../../data/data"
 import { IoMdCloudUpload } from "react-icons/io";
 import { IoIosLogIn } from "react-icons/io";
 import { IoIosLogOut } from "react-icons/io";
-import { OpenContext, UserContext } from "../../context/context";
+import { MediaPlayerContext, OpenContext, UserContext } from "../../context/context";
 import { logout } from "../../apis/auth";
 import { useNavigate, Link } from "react-router-dom";
 import "./navbar.scss"
 
 export const Navbar = () => {
     const { openAuthTab, openUploadTab } = useContext(OpenContext)
+    const { setMedia } = useContext(MediaPlayerContext)
     const { isUser, setUser } = useContext(UserContext);
     const navigation = useNavigate()
-    
+
     const logoutHandler = async () => {
-        await logout();
         localStorage.removeItem("userId");
+        await logout();
+        setMedia({})
         setUser("");
         navigation("/")
     }
