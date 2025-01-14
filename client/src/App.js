@@ -32,9 +32,8 @@ function App() {
             <Route path="/podcast/search/:category" element={<Category />} />
             <Route path="/podcast/podcast-details/:id" element={<PodcastDetails />} />
           </Route>
-          <Route path="*" element={<Navigate to={"/"} />} />
         </Routes>
-        {open.isAuthOpen && < Auth />}
+        {open.isAuthOpen && < Auth />} 
         {open.isUploadOpen && <Upload />}
       </BrowserRouter>
     </div>
